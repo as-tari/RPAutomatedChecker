@@ -21,7 +21,7 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 # Sidebar menu
 selected = st.sidebar.selectbox(
     "Main Menu",  # Title for the sidebar
-    ["General", "Pengumpulan Proposal Skripsi"] 
+    ["General", "Pengumpulan Proposal Skripsi"]) 
     
 with st.sidebar:
     selected = option_menu(
