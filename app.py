@@ -96,8 +96,8 @@ def upload_page():
             except Exception as e:
                 st.error(f"Error saat membaca file Excel: {e}")
 
-    # Upload Bundle Dokumen (ZIP)
-    uploaded_zip = st.file_uploader("Upload Bundle Dokumen (ZIP)", type=["zip"])
+    # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
+    uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP)", type=["zip"])
 
     if uploaded_zip:
         if not check_file_size(uploaded_zip):
@@ -110,9 +110,9 @@ def upload_page():
                 f.write(uploaded_zip.getbuffer())
             
             try:
-                with zipfile.ZipFile(zip_path, 'r') as zip_ref:  # Added the missing colon here
+                with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                     zip_ref.extractall(BASE_UPLOAD_DIR)
-                st.success("Bundle dokumen berhasil diekstrak!")
+                st.success("File ZIP berhasil diekstrak!")
             except zipfile.BadZipFile:
                 st.error("File ZIP yang diupload tidak valid.")
 
@@ -200,21 +200,6 @@ def upload_page():
                 st.download_button("Unduh Laporan sebagai Excel", f, file_name=excel_file)
         else:
             st.warning("Silakan upload data mahasiswa terlebih dahulu sebelum melihat laporan.")
-
-def instructions_page():
-    st.title("Operating Instructions")
-    st.subheader("1. Upload Student Data (Unggah Data Mahasiswa)")
-    st.write("• Click on the “Upload Data” section on the homepage.")
-    st.write("• Select the Excel file containing student data.")
-    
-    st.subheader("2. Upload Document Bundle (Unggah Bundle Dokumen)")
-    st.write("• After uploading the student data, upload the document bundle in ZIP format.")
-    
-    st.subheader("3. Check Document Completeness (Cek Kelengkapan Berkas Mahasiswa)")
-    st.write("• Click the “Check Document Completeness” button after both files are uploaded.")
-    
-    st.subheader("4. Download Report (Unduh Laporan)")
-    st.write("• After the verification process is complete, the document status report will be displayed.")
 
 if __name__ == "__main__":
     main()
