@@ -1,129 +1,103 @@
 import streamlit as st
 from PIL import Image
 import hashlib
-
-# Custom CSS to add logo at the top of the sidebar
-st.markdown("""
-    <style>
-    .sidebar .logo {
-        position: fixed;
-        top: 10px;  /* Adjusted this value as needed */
-        left: 10px; /* Adjusted this value as needed */
-        z-index: 1000; /* Ensured it stays above other elements */
-    }
-    .sidebar .sidebar-content {
-        margin-top: 100px; /* Adjusted this value to create space for the logo */
-    }
-    </style>
-""", unsafe_allow_html=True)
+import streamlit_option_menu
+from streamlit_option_menu import option_menu
+import os
+import re
+import pandas as pd
+import zipfile
 
 # Display the logo in the sidebar
 image = Image.open('logo.png')
 st.sidebar.image(image, width=100, use_column_width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
-# General page content
-st.title("RP Submission Review System (Beta)")
-
 # Customizing font style
 # Load the CSS file
 with open("style.css") as css:
     st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
-
-def make_hashes(password):
-    return hashlib.sha256(str.encode(password)).hexdigest()
-
-def check_hashes(password, hashed_text):
-    if make_hashes(password) == hashed_text:
-        return hashed_text
-    return False
-
-if "logged_in" not in st.session_state:
-    st.session_state["logged_in"] = False
-
-def login():
-    st.subheader("Login")
-    email = st.text_input("Email")
-    password = st.text_input("Password", type='password')
     
-    if st.button("Login"):
-        if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
-            st.session_state["logged_in"] = True
-            st.success("Logged in successfully!")
-            # Call the function to display the protected content
-            show_protected_content()
-        else:
-            st.warning("Incorrect email or password")
+with st.sidebar:
+    selected = option_menu(
+    menu_title = "Main Channels",
+    options = ["General","Pengumpulan Proposal Skripsi"],
+    default_index = 0,
+    #orientation = "horizontal",
+)
+if selected == "General": # General channel content
+    st.header('RP Submission Review System (Beta)')
 
-def show_protected_content():
-    st.title("Welcome to the Protected Page")
-
-    if st.button("Logout"):
+if selected == "Pengumpulan Proposal Skripsi": # Pengumpulan Proposal Skripsi channel content
+    st.header('RP Submission Review System (Beta)')
+    
+    # Define a constant for the maximum upload size (in MB)
+    MAX_UPLOAD_SIZE_MB = 5000  # 5GB
+    
+    # Function to check file size
+    def check_file_size(file):
+        return file.size <= MAX_UPLOAD_SIZE_MB * 1024 * 1024  # Convert MB to bytes
+    
+    def make_hashes(password):
+        return hashlib.sha256(str.encode(password)).hexdigest()
+    
+    def check_hashes(password, hashed_text):
+        if make_hashes(password) == hashed_text:
+            return hashed_text
+        return False
+    
+    if "logged_in" not in st.session_state:
         st.session_state["logged_in"] = False
-        st.success("Logged out successfully!")
-
-# Main logic
-if st.session_state["logged_in"]:
-    show_protected_content()
-else:
-    login()
-
-import os
-import re
-import pandas as pd
-import streamlit as st
-import zipfile
-
-# Define a constant for the maximum upload size (in MB)
-MAX_UPLOAD_SIZE_MB = 5000  # 5GB
-
-# Function to check file size
-def check_file_size(file):
-    return file.size <= MAX_UPLOAD_SIZE_MB * 1024 * 1024  # Convert MB to bytes
-
-# Define a simple authentication function with multiple usernames and passwords
-def authenticate(username, password):
-    valid_credentials = {
-        "admin": "tarikeren",
-        "timrp": "psl401"
-    }
-    return valid_credentials.get(username) == password
-
-# Create the login form
-def login():
-    st.markdown("<h2 style='text-align: center;'>Login</h2>", unsafe_allow_html=True)
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-    if st.button("Login"):
-        if authenticate(username, password):
-            st.session_state["authenticated"] = True
-            st.success("Login successful!")
-            upload_page()
-        else:
-            st.error("Invalid username or password")
-
-# Validate filename against expected format
-def validate_filename(filename, expected_format):
-    pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
-                             .replace("KodeDosenPembimbing", r"\w") \
-                             .replace("DosenPembimbing", r"\w+(\s\w+)*") \
-                             .replace("KodeDosenReviewer", r"\w") \
-                             .replace("DosenReviewer", r"\w+(\s\w+)*") \
-                             .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
-                             .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
-                             .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
-    return re.match(pattern, filename) is not None
-
-# Main application logic
-def main():
-    if "authenticated" not in st.session_state:
-        st.session_state["authenticated"] = False
-
-    if not st.session_state["authenticated"]:
-        login()
+    
+    def login():
+        st.subheader("Login")
+        email = st.text_input("Email")
+        password = st.text_input("Password", type='password')
+        
+        if st.button("Login"):
+            if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
+                st.session_state["logged_in"] = True
+                st.success("Logged in successfully!")
+                # Call the function to display the protected content
+                show_protected_content()
+            else:
+                st.warning("Incorrect email or password")
+    
+    def show_protected_content():
+        st.title("Welcome to the Protected Page")
+    
+        if st.button("Logout"):
+            st.session_state["logged_in"] = False
+            st.success("Logged out successfully!")
+    
+    # Main logic
+    if st.session_state["logged_in"]:
+        show_protected_content()
     else:
-        home_page()
-        instructions_page()
+        login()
+    
+    # Validate filename against expected format
+    def validate_filename(filename, expected_format):
+        pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
+                                 .replace("KodeDosenPembimbing", r"\w") \
+                                 .replace("DosenPembimbing", r"\w+(\s\w+)*") \
+                                 .replace("KodeDosenReviewer", r"\w") \
+                                 .replace("DosenReviewer", r"\w+(\s\w+)*") \
+                                 .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
+                                 .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
+                                 .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
+        return re.match(pattern, filename) is not None
+    
+    # Main application logic
+    def main():
+        if "authenticated" not in st.session_state:
+            st.session_state["authenticated"] = False
+    
+        if not st.session_state["authenticated"]:
+            login()
+        else:
+            home_page()
+            instructions_page()
 
 def home_page():
     st.title("📑 RP Automated Checker")
@@ -272,15 +246,15 @@ def upload_page():
         report_df = pd.DataFrame(report)
 
         if not report_df.empty:
-            st.subheader("Laporan Status Pengumpulan Dokumen:")
+            st.subheader("Laporan Hasil Cek Pengumpulan Proposal Skripsi:")
             st.dataframe(report_df)
 
-            excel_file = "laporan_status_pengumpulan_rp.xlsx"
+            excel_file = "Laporan_Hasil_Cek_Pengumpulan_Proposal_Skripsi.xlsx"
             report_df.to_excel(excel_file, index=False)
             with open(excel_file, "rb") as f:
-                st.download_button("Unduh Laporan sebagai Excel", f, file_name=excel_file)
+                st.download_button("Unduh Laporan (.xlsx)", f, file_name=excel_file)
         else:
-            st.warning("Silakan upload data mahasiswa terlebih dahulu sebelum melihat laporan.")
+            st.warning("Silakan upload file terlebih dahulu sebelum membuat laporan.")
 
 if __name__ == "__main__":
     main()
