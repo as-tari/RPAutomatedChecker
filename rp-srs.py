@@ -1,6 +1,8 @@
 import streamlit as st
 from PIL import Image
 import hashlib
+import streamlit_option_menu
+from streamlit_option_menu import option_menu
 import os
 import re
 import pandas as pd
@@ -8,31 +10,123 @@ import zipfile
 
 # Display the logo in the sidebar
 image = Image.open('logo.png')
-st.sidebar.image(image, width=100, use_column_width=True, output_format="PNG", clamp=True)
-st.sidebar.subheader("PSL 401 Rancangan Penelitian", divider="gray")
+st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
+st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
+# Customizing font style
 # Load the CSS file
 with open("style.css") as css:
     st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
-
-# Sidebar menu
+    
 with st.sidebar:
-    selected = st.selectbox("Main Channels", ["General", "Pengumpulan Proposal Skripsi"])
+    selected = option_menu(
+    menu_title = "Main Channels",
+    options = ["General","Pengumpulan Proposal Skripsi"],
+    default_index = 0,
+    #orientation = "horizontal",
+)
+if selected == "General": # General channel content
+    st.header('RP Submission Review System (Beta)')
 
-if selected == "General":
-    home_page()
-elif selected == "Pengumpulan Proposal Skripsi":
-    upload_page()
+if selected == "Pengumpulan Proposal Skripsi": # Pengumpulan Proposal Skripsi channel content
+    st.header('RP Submission Review System (Beta)')
+    
+    # Define a constant for the maximum upload size (in MB)
+    MAX_UPLOAD_SIZE_MB = 5000  # 5GB
+    
+    # Function to check file size
+    def check_file_size(file):
+        return file.size <= MAX_UPLOAD_SIZE_MB * 1024 * 1024  # Convert MB to bytes
+    
+    def make_hashes(password):
+        return hashlib.sha256(str.encode(password)).hexdigest()
+    
+    def check_hashes(password, hashed_text):
+        if make_hashes(password) == hashed_text:
+            return hashed_text
+        return False
+    
+    if "logged_in" not in st.session_state:
+        st.session_state["logged_in"] = False
+    
+    def login():
+        st.subheader("Login")
+        email = st.text_input("Email")
+        password = st.text_input("Password", type='password')
+        
+        if st.button("Login"):
+            if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
+                st.session_state["logged_in"] = True
+                st.success("Logged in successfully!")
+                # Call the function to display the protected content
+                show_protected_content()
+            else:
+                st.warning("Incorrect email or password")
+    
+    def show_protected_content():
+        st.title("Welcome to the Protected Page")
+    
+        if st.button("Logout"):
+            st.session_state["logged_in"] = False
+            st.success("Logged out successfully!")
+    
+    # Main logic
+    if st.session_state["logged_in"]:
+        show_protected_content()
+    else:
+        login()
+    
+    # Validate filename against expected format
+    def validate_filename(filename, expected_format):
+        pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
+                                 .replace("KodeDosenPembimbing", r"\w") \
+                                 .replace("DosenPembimbing", r"\w+(\s\w+)*") \
+                                 .replace("KodeDosenReviewer", r"\w") \
+                                 .replace("DosenReviewer", r"\w+(\s\w+)*") \
+                                 .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
+                                 .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
+                                 .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
+        return re.match(pattern, filename) is not None
+    
+    # Main application logic
+    def main():
+        if "authenticated" not in st.session_state:
+            st.session_state["authenticated"] = False
+    
+        if not st.session_state["authenticated"]:
+            login()
+        else:
+            home_page()
+            instructions_page()
 
 def home_page():
     st.title("📑 RP Automated Checker")
     st.markdown("RP Automated Checker is a web-based application designed to streamline the document verification process for Rancangan Penelitian (RP) final submissions.")
     st.markdown("Proceed to upload your data and documents below.")
 
+def instructions_page():
+    st.title("Operating Instructions")
+    st.subheader("1. Upload Student Data (Unggah Data Mahasiswa)")
+    st.write("• Click on the “Upload Data” section on the homepage.")
+    st.write("• Select the Excel file containing student data.")
+    
+    st.subheader("2. Upload Document Bundle (Unggah Bundle Dokumen)")
+    st.write("• After uploading the student data, upload the document bundle in ZIP format.")
+    
+    st.subheader("3. Check Document Completeness (Cek Kelengkapan Berkas Mahasiswa)")
+    st.write("• Click the “Check Document Completeness” button after both files are uploaded.")
+    
+    st.subheader("4. Download Report (Unduh Laporan)")
+    st.write("• After the verification process is complete, the document status report will be displayed.")
+    
 def upload_page():
     st.header("Pengumpulan Proposal Skripsi")
     st.subheader("Cek Kelengkapan Berkas")
 
+    # Download ZIP File from Teams
+    st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
+    st.write("Once the link opens, it will direct you to the OneDrive Atma Jaya folder: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. At the top of the page, you will see a toolbar with a ‘Download’ button. Click the ‘Download’ button to save the file.")
+    
     # Upload Data Mahasiswa RP (Excel)
     uploaded_excel = st.file_uploader("Upload Data Mahasiswa RP (Excel)", type=["xlsx"])
     students_data = {}
@@ -47,7 +141,7 @@ def upload_page():
                 if not all(col in df.columns for col in required_columns):
                     st.error("File Excel harus memiliki kolom 'KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', dan 'KodeDosenReviewer'.")
                 else:
-                    for index, row in df .iterrows():
+                    for index, row in df.iterrows():
                         students_data[row['KodeMahasiswa']] = {
                             "name": row['NamaMahasiswa'],
                             "dosen_pembimbing": row['KodeDosenPembimbing'],
@@ -135,7 +229,7 @@ def upload_page():
                     "Nama": student_info['name'],
                     "KodeMahasiswa": student_code,
                     "KodeDosenPembimbing": dosen_pembimbing_code,
-                    "KodeD osenReviewer": dosen_reviewer_code,
+                    "KodeDosenReviewer": dosen_reviewer_code,
                     "Status": f"Belum mengumpulkan {', '.join(missing_documents)}" if missing_documents else "Semua dokumen sudah dikumpulkan",
                     "Remarks": "\n".join(remarks) if remarks else "-"
                 })
@@ -161,20 +255,6 @@ def upload_page():
                 st.download_button("Unduh Laporan (.xlsx)", f, file_name=excel_file)
         else:
             st.warning("Silakan upload file terlebih dahulu sebelum membuat laporan.")
-
-def check_file_size(file):
-    return file.size <= MAX_UPLOAD_SIZE_MB * 1024 * 1024  # Convert MB to bytes
-
-def validate_filename(filename, expected_format):
-    pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
-                             .replace("KodeDosenPembimbing", r"\w") \
-                             .replace("DosenPembimbing", r"\w+(\s\w+)*") \
-                             .replace("KodeDosenReviewer", r"\w") \
-                             .replace("DosenReviewer", r"\w+(\s\w+)*") \
-                             .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
-                             .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
-                             .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
-    return re.match(pattern, filename) is not None
 
 if __name__ == "__main__":
     main()
