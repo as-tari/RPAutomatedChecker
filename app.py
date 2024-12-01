@@ -4,6 +4,14 @@ import pandas as pd
 import streamlit as st
 import zipfile
 
+st.header("_Streamlit_ is :blue[cool] :sunglasses:")
+st.header("This is a header with a divider", divider="gray")
+st.header("These headers have rotating dividers", divider=True)
+st.header("One", divider=True)
+st.header("Two", divider=True)
+st.header("Three", divider=True)
+st.header("Four", divider=True)
+
 # Define a constant for the maximum upload size (in MB)
 MAX_UPLOAD_SIZE_MB = 5000  # 5GB
 
@@ -61,10 +69,11 @@ def home_page():
     st.markdown("Please proceed to upload your data and documents below.")
 
 def upload_page():
-    st.title("Upload Student Data and Documents")
+    st.header("Pengumpulan Proposal Skripsi")
+    st.subheader("Cek Kelengkapan Berkas")
     
-    # Upload Data Mahasiswa (Excel)
-    uploaded_excel = st.file_uploader("Upload Data Mahasiswa (Excel)", type=["xlsx"])
+    # Upload Data Mahasiswa RP (Excel)
+    uploaded_excel = st.file_uploader("Upload Data Mahasiswa RP (Excel)", type=["xlsx"])
     students_data = {}
 
     if uploaded_excel:
@@ -75,7 +84,7 @@ def upload_page():
                 df = pd.read_excel(uploaded_excel)
                 required_columns = ['KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', 'KodeDosenReviewer']
                 if not all(col in df.columns for col in required_columns):
-                    st.error("File Excel harus mengandung kolom 'KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', dan 'KodeDosenReviewer'.")
+                    st.error("File Excel harus memiliki kolom 'KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', dan 'KodeDosenReviewer'.")
                 else:
                     for index, row in df.iterrows():
                         students_data[row['KodeMahasiswa']] = {
@@ -88,24 +97,24 @@ def upload_page():
                 st.error(f"Error saat membaca file Excel: {e}")
 
     # Upload Bundle Dokumen (ZIP)
-uploaded_zip = st.file_uploader("Upload Bundle Dokumen (ZIP)", type=["zip"])
+    uploaded_zip = st.file_uploader("Upload Bundle Dokumen (ZIP)", type=["zip"])
 
-if uploaded_zip:
-    if not check_file_size(uploaded_zip):
-        st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
-    else:
-        BASE_UPLOAD_DIR = "uploads"
-        os.makedirs(BASE_UPLOAD_DIR, exist_ok=True)
-        zip_path = os.path.join(BASE_UPLOAD_DIR, uploaded_zip.name)
-        with open(zip_path, "wb") as f:
-            f.write(uploaded_zip.getbuffer())
-        
-        try:
-            with zipfile.ZipFile(zip_path, 'r') as zip_ref:  # Added the missing colon here
-                zip_ref.extractall(BASE_UPLOAD_DIR)
-            st.success("Bundle dokumen berhasil diekstrak!")
-        except zipfile.BadZipFile:
-            st.error("File ZIP yang diupload tidak valid.")
+    if uploaded_zip:
+        if not check_file_size(uploaded_zip):
+            st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
+        else:
+            BASE_UPLOAD_DIR = "uploads"
+            os.makedirs(BASE_UPLOAD_DIR, exist_ok=True)
+            zip_path = os.path.join(BASE_UPLOAD_DIR, uploaded_zip.name)
+            with open(zip_path, "wb") as f:
+                f.write(uploaded_zip.getbuffer())
+            
+            try:
+                with zipfile.ZipFile(zip_path, 'r') as zip_ref:  # Added the missing colon here
+                    zip_ref.extractall(BASE_UPLOAD_DIR)
+                st.success("Bundle dokumen berhasil diekstrak!")
+            except zipfile.BadZipFile:
+                st.error("File ZIP yang diupload tidak valid.")
 
     # Process and validate uploaded data
     if students_data:
