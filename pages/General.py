@@ -4,7 +4,7 @@ from PIL import Image
 image = Image.open('logo.png')
 st.sidebar.image(image, width=100)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian")
-st.divider()
+st.sidebar.divider()
 
 st.header("_Streamlit_ is :blue[cool] :sunglasses:")
 st.header("This is a header with a divider", divider="gray")
