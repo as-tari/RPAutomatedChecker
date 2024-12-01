@@ -20,6 +20,15 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
 # Sidebar menu
 selected_page = st.sidebar.radio("Main Channels", ["General", "Pengumpulan Proposal Skripsi"])
+
+# Sidebar for navigation using buttons
+st.sidebar.title("Main Menu")
+if st.sidebar.button("General"):
+    selected_page = "General"
+elif st.sidebar.button("Pengumpulan Proposal Skripsi"):
+    selected_page = "Pengumpulan Proposal Skripsi"
+else:
+    selected_page = "General"  # Default page
     
 with st.sidebar:
     selected = option_menu(
