@@ -18,23 +18,7 @@ image = Image.open('logo.png')
 st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
-# Custom CSS to style the sidebar menu
-st.markdown("""
-    <style>
-    .css-1aumxhk {
-        background-color: transparent;  /* Remove background color */
-    }
-    .css-1aumxhk .stSelectbox {
-        font-size: 12px;  /* Adjust font size */
-    }
-    .css-1aumxhk .stSelectbox:hover {
-        background-color: transparent;  /* Remove hover background color */
-    }
-    </style>
-""", unsafe_allow_html=True)
-
 # Sidebar menu
-
 with st.sidebar:
     selected = option_menu(
         options=["General", "Pengumpulan Proposal Skripsi"],
