@@ -1,3 +1,8 @@
+import streamlit as st
+
+st.logo()
+st.sidebar.markdown("PSL 401 Rancangan Penelitian")
+
 st.header("_Streamlit_ is :blue[cool] :sunglasses:")
 st.header("This is a header with a divider", divider="gray")
 st.header("These headers have rotating dividers", divider=True)
