@@ -21,18 +21,13 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 # Sidebar menu
 selected_page = st.sidebar.radio("", ["General", "Pengumpulan Proposal Skripsi"])
 
-import streamlit as st
+# Sidebar for navigation using HTML links
+st.sidebar.markdown("[General](?page=general)")
+st.sidebar.markdown("[Pengumpulan Proposal Skripsi](?page=pengumpulan)")
 
 # Get current query parameters
 query_params = st.experimental_get_query_params()
-page = query_params.get("page", ["General"])[0]  # Default to "General" if no page is specified
-
-# Sidebar for navigation using buttons
-st.sidebar.title("Main Menu")
-if st.sidebar.button("General"):
-    st.experimental_set_query_params(page="General")
-elif st.sidebar.button("Pengumpulan Proposal Skripsi"):
-    st.experimental_set_query_params(page="Pengumpulan Proposal Skripsi")
+page = query_params.get("page", ["general"])[0]  # Default to "general" if no page is specified
 
 # Page content based on the selected option
 if page == "General":
