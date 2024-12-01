@@ -19,21 +19,13 @@ st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
 # Sidebar menu
-selected_page = st.sidebar.radio("", ["General", "Pengumpulan Proposal Skripsi"])
-
-# Sidebar for navigation using HTML links
-st.sidebar.markdown("[General](?page=general)")
-st.sidebar.markdown("[Pengumpulan Proposal Skripsi](?page=pengumpulan)")
-
-# Get current query parameters
-query_params = st.experimental_get_query_params()
-page = query_params.get("page", ["general"])[0]  # Default to "general" if no page is specified
+page = st.sidebar.radio("", ["General", "Pengumpulan Proposal Skripsi"])
 
 # Page content based on the selected option
 if page == "General":
     st.header('RP Submission Review System (Beta)')
 
-elif page == "Pengumpulan Proposal Skripsi": # Pengumpulan Proposal Skripsi channel content
+elif page == "Pengumpulan Proposal Skripsi":
     st.header('RP Submission Review System (Beta)')
     
     # Define a constant for the maximum upload size (in MB)
