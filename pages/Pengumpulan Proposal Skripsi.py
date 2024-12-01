@@ -60,6 +60,21 @@ def home_page():
     st.markdown("RP Automated Checker is a web-based application designed to streamline the document verification process for Rancangan Penelitian (RP) final submissions.")
     st.markdown("Proceed to upload your data and documents below.")
 
+def instructions_page():
+    st.title("Operating Instructions")
+    st.subheader("1. Upload Student Data (Unggah Data Mahasiswa)")
+    st.write("• Click on the “Upload Data” section on the homepage.")
+    st.write("• Select the Excel file containing student data.")
+    
+    st.subheader("2. Upload Document Bundle (Unggah Bundle Dokumen)")
+    st.write("• After uploading the student data, upload the document bundle in ZIP format.")
+    
+    st.subheader("3. Check Document Completeness (Cek Kelengkapan Berkas Mahasiswa)")
+    st.write("• Click the “Check Document Completeness” button after both files are uploaded.")
+    
+    st.subheader("4. Download Report (Unduh Laporan)")
+    st.write("• After the verification process is complete, the document status report will be displayed.")
+    
 def upload_page():
     st.header("Pengumpulan Proposal Skripsi")
     st.subheader("Cek Kelengkapan Berkas")
