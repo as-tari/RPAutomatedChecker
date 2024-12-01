@@ -1,7 +1,8 @@
 import streamlit as st
+from PIL import Image
 
 image = Image.open('logo.png')
-    st.image(image,caption=None,output_format="PNG")
+st.sidebar.image(image, use_column_width=True)
 st.sidebar.markdown("PSL 401 Rancangan Penelitian")
 
 st.header("_Streamlit_ is :blue[cool] :sunglasses:")
