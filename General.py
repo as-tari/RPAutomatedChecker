@@ -8,11 +8,6 @@ import re
 import pandas as pd
 import zipfile
 
-# Customizing font style
-# Load the CSS file
-with open("style.css") as css:
-    st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
-
 # Display the logo in the sidebar
 image = Image.open('logo.png')
 st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
