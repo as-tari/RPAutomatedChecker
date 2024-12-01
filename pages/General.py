@@ -7,7 +7,7 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 
 st.header("_Streamlit_ is :blue[cool] :sunglasses:")
 st.subheader("This is a header with a divider", divider="gray")
-st.markdown("These headers have rotating dividers", divider=True)
+st.subheader("These headers have rotating dividers", divider=True)
 st.write("One", divider=True)
 st.write("Two", divider=True)
 st.write("Three", divider=True)
