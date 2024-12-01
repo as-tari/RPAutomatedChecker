@@ -23,12 +23,6 @@ with st.sidebar:
     selected = option_menu(
         options=["General", "Pengumpulan Proposal Skripsi"],
         default_index=0,
-        menu_icon=None,  # Remove icon
-        styles={
-            "container": {"padding": "5!important", "background-color": "transparent"},
-            "nav-link": {"font-size": "12px"},  # Adjust font size for links
-            "nav-link-selected": {"background-color": "transparent"},  # Remove selected background color
-        }
     )
 
 # Content based on selection
