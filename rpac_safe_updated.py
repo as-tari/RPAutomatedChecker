@@ -6,7 +6,7 @@ def add_custom_css():
     <style>
         .stApp {
             background-color: #cadbf5;
-            color: #000000;
+            color: #ffffff;
         }
         h1, h2, h3 {
             background-color: #5c6bc0;
@@ -17,7 +17,7 @@ def add_custom_css():
         }
         .stButton>button {
             background-color: #578ce4;
-            color: #ffffff;
+            color: #000000;
             border: none;
             border-radius: 5px;
             padding: 10px;
