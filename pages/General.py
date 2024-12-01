@@ -6,12 +6,12 @@ st.sidebar.image(image, width=100)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 
 st.header("_Streamlit_ is :blue[cool] :sunglasses:")
-st.header("This is a header with a divider", divider="gray")
-st.header("These headers have rotating dividers", divider=True)
-st.header("One", divider=True)
-st.header("Two", divider=True)
-st.header("Three", divider=True)
-st.header("Four", divider=True)
+st.subheader("This is a header with a divider", divider="gray")
+st.markdown("These headers have rotating dividers", divider=True)
+st.write("One", divider=True)
+st.write("Two", divider=True)
+st.write("Three", divider=True)
+st.write("Four", divider=True)
 
 def instructions_page():
     st.title("Operating Instructions")
