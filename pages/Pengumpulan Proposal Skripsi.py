@@ -4,14 +4,6 @@ import pandas as pd
 import streamlit as st
 import zipfile
 
-st.header("_Streamlit_ is :blue[cool] :sunglasses:")
-st.header("This is a header with a divider", divider="gray")
-st.header("These headers have rotating dividers", divider=True)
-st.header("One", divider=True)
-st.header("Two", divider=True)
-st.header("Three", divider=True)
-st.header("Four", divider=True)
-
 # Define a constant for the maximum upload size (in MB)
 MAX_UPLOAD_SIZE_MB = 5000  # 5GB
 
