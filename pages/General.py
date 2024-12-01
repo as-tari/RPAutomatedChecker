@@ -1,6 +1,7 @@
 import streamlit as st
 
-st.logo(https://github.com/as-tari/rp-srs/logo.png)
+image = Image.open('logo.png')
+    st.image(image,caption=None,output_format="PNG")
 st.sidebar.markdown("PSL 401 Rancangan Penelitian")
 
 st.header("_Streamlit_ is :blue[cool] :sunglasses:")
