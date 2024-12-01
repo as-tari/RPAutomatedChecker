@@ -39,7 +39,7 @@ def login():
     password = st.text_input("Password", type='password')
 
     if st.button("Login"):
-        if email == "rp.fpuaj@gmail.com","admin" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com","tarikeren")):
+        if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
             st.session_state["logged_in"] = True
             st.success("Logged in successfully!")
             # Call the function to display the protected content
