@@ -23,6 +23,7 @@ with st.sidebar:
     selected = option_menu(
     menu_title = "",
     options = ["General","Pengumpulan Proposal Skripsi"],
+    icon = [""]
     default_index = 0,
     #orientation = "horizontal",
 )
