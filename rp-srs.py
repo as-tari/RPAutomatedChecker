@@ -21,9 +21,11 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 # Sidebar menu
 with st.sidebar:
     selected = option_menu(
-        options=["General", "Pengumpulan Proposal Skripsi"],
-        default_index=0,
-    )
+    menu_title = "",
+    options = ["General","Pengumpulan Proposal Skripsi"],
+    default_index = 0,
+    #orientation = "horizontal",
+)
 
 # Content based on selection
 if selected == "General": # General channel content
