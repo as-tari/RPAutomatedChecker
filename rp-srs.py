@@ -8,23 +8,46 @@ import re
 import pandas as pd
 import zipfile
 
+# Customizing font style
+# Load the CSS file
+with open("style.css") as css:
+    st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
+
 # Display the logo in the sidebar
 image = Image.open('logo.png')
 st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
-# Customizing font style
-# Load the CSS file
-with open("style.css") as css:
-    st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
-    
+# Custom CSS to style the sidebar menu
+st.markdown("""
+    <style>
+    .css-1aumxhk {
+        background-color: transparent;  /* Remove background color */
+    }
+    .css-1aumxhk .stSelectbox {
+        font-size: 12px;  /* Adjust font size */
+    }
+    .css-1aumxhk .stSelectbox:hover {
+        background-color: transparent;  /* Remove hover background color */
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Sidebar menu
 with st.sidebar:
     selected = option_menu(
-    menu_title = "Main Channels",
-    options = ["General","Pengumpulan Proposal Skripsi"],
-    default_index = 0,
-    #orientation = "horizontal",
-)
+        options=["General", "Pengumpulan Proposal Skripsi"],
+        default_index=0,
+        menu_icon=None,  # Remove icon
+        styles={
+            "container": {"padding": "5!important", "background-color": "transparent"},
+            "icon": {"font-size": "12px"},  # Adjust icon size if you add icons
+            "nav-link": {"font-size": "12px"},  # Adjust font size for links
+            "nav-link-selected": {"background-color": "transparent"},  # Remove selected background color
+        }
+    )
+
+# Content based on selection
 if selected == "General": # General channel content
     st.header('RP Submission Review System (Beta)')
 
