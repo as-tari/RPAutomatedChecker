@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 
 image = Image.open('logo.png')
-st.sidebar.image(image, use_column_width=True)
+st.sidebar.image(image, width=100)
 
 st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 
