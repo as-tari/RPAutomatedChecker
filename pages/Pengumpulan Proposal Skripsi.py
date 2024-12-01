@@ -28,6 +28,7 @@ def login():
         if authenticate(username, password):
             st.session_state["authenticated"] = True
             st.success("Login successful!")
+            upload_page()
         else:
             st.error("Invalid username or password")
 
@@ -52,17 +53,20 @@ def main():
         login()
     else:
         home_page()
-        upload_page()
         instructions_page()
 
 def home_page():
     st.title("📑 RP Automated Checker")
     st.markdown("RP Automated Checker is a web-based application designed to streamline the document verification process for Rancangan Penelitian (RP) final submissions.")
-    st.markdown("Please proceed to upload your data and documents below.")
+    st.markdown("Proceed to upload your data and documents below.")
 
 def upload_page():
     st.header("Pengumpulan Proposal Skripsi")
     st.subheader("Cek Kelengkapan Berkas")
+
+    # Download ZIP File from Teams
+    st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
+    st.write("Once the link opens, it will direct you to the OneDrive Atma Jaya folder: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. At the top of the page, you will see a toolbar with a ‘Download’ button. Click the ‘Download’ button to save the file.")
     
     # Upload Data Mahasiswa RP (Excel)
     uploaded_excel = st.file_uploader("Upload Data Mahasiswa RP (Excel)", type=["xlsx"])
