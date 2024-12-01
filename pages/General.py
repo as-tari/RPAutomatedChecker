@@ -5,7 +5,7 @@ image = Image.open('logo.png')
 image = image.resize((512, 512))
 st.sidebar.image(image, use_column_width=True)
 
-st.sidebar.subheading("PSL 401 Rancangan Penelitian")
+st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 
 st.header("_Streamlit_ is :blue[cool] :sunglasses:")
 st.header("This is a header with a divider", divider="gray")
