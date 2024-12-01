@@ -10,14 +10,14 @@ def add_custom_css():
         }
         h1, h2, h3 {
             background-color: #5c6bc0;
-            color: #ffffff;
+            color: #000000;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
         }
         .stButton>button {
             background-color: #578ce4;
-            color: #000000;
+            color: #ffffff;
             border: none;
             border-radius: 5px;
             padding: 10px;
