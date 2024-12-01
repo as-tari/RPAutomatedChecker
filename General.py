@@ -24,7 +24,6 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
 # General page content
 st.title("RP Submission Review System (Beta)")
-st.write("Welcome, Tim RP!")
 
 # Customizing font style
 # Load the CSS file
