@@ -19,6 +19,10 @@ st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
 # Sidebar menu
+selected = st.sidebar.selectbox(
+    "Main Menu",  # Title for the sidebar
+    ["General", "Pengumpulan Proposal Skripsi"] 
+    
 with st.sidebar:
     selected = option_menu(
     menu_title = "",
