@@ -34,6 +34,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Sidebar menu
+
 with st.sidebar:
     selected = option_menu(
         options=["General", "Pengumpulan Proposal Skripsi"],
@@ -41,7 +42,6 @@ with st.sidebar:
         menu_icon=None,  # Remove icon
         styles={
             "container": {"padding": "5!important", "background-color": "transparent"},
-            "icon": {"font-size": "12px"},  # Adjust icon size if you add icons
             "nav-link": {"font-size": "12px"},  # Adjust font size for links
             "nav-link-selected": {"background-color": "transparent"},  # Remove selected background color
         }
