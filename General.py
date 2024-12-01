@@ -34,6 +34,7 @@ def login():
 
 def show_protected_content():
     st.title("Welcome to the Protected Page")
+    
     image = Image.open('logo.png')
     st.sidebar.image(image, width=100)
     st.sidebar.subheader("PSL 401 Rancangan Penelitian")
