@@ -19,7 +19,7 @@ st.markdown("""
 
 # Display the logo in the sidebar
 image = Image.open('logo.png')
-st.sidebar.image(image, width=100, use_column_width=True, output_format="PNG", clamp=True)
+st.sidebar.image(image, width=100, use_column_width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 
 # General page content
