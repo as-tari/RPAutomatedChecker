@@ -1,8 +1,6 @@
 import streamlit as st
 import hashlib
 
-st.header("RP Submission Review System")
-
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
 
@@ -41,3 +39,5 @@ if st.session_state["logged_in"]:
         st.success("Logged out successfully!")
 else:
     login()
+
+st.header("RP Submission Review System")
