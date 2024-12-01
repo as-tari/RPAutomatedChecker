@@ -1,6 +1,11 @@
 import streamlit as st
 from PIL import Image
 
+# Customizing font style
+# Load the CSS file
+with open("style.css") as css:
+    st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
+
 image = Image.open('logo.png')
 st.sidebar.image(image, width=100)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian")
