@@ -21,27 +21,24 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian",divider="gray")
 # Sidebar menu
 selected_page = st.sidebar.radio("", ["General", "Pengumpulan Proposal Skripsi"])
 
-# Sidebar for navigation using buttons
-if st.sidebar.button("General"):
-    selected_page = "General"
-elif st.sidebar.button("Pengumpulan Proposal Skripsi"):
-    selected_page = "Pengumpulan Proposal Skripsi"
-else:
-    selected_page = "General"  # Default page
-    
-with st.sidebar:
-    selected = option_menu(
-    menu_title = "",
-    options = ["General","Pengumpulan Proposal Skripsi"],
-    default_index = 0,
-    #orientation = "horizontal",
-)
+import streamlit as st
 
-# Content based on selection
-if selected == "General": # General channel content
+# Get current query parameters
+query_params = st.experimental_get_query_params()
+page = query_params.get("page", ["General"])[0]  # Default to "General" if no page is specified
+
+# Sidebar for navigation using buttons
+st.sidebar.title("Main Menu")
+if st.sidebar.button("General"):
+    st.experimental_set_query_params(page="General")
+elif st.sidebar.button("Pengumpulan Proposal Skripsi"):
+    st.experimental_set_query_params(page="Pengumpulan Proposal Skripsi")
+
+# Page content based on the selected option
+if page == "General":
     st.header('RP Submission Review System (Beta)')
 
-if selected == "Pengumpulan Proposal Skripsi": # Pengumpulan Proposal Skripsi channel content
+elif page == "Pengumpulan Proposal Skripsi": # Pengumpulan Proposal Skripsi channel content
     st.header('RP Submission Review System (Beta)')
     
     # Define a constant for the maximum upload size (in MB)
