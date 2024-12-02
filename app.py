@@ -62,7 +62,7 @@ def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
     
     # Menambahkan tab setelah pesan sambutan
-    tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
+    st.tabs(["Cek Kelengkapan"])
 
     with tab2:
         st.subheader("Cek Kelengkapan")
@@ -70,7 +70,7 @@ def show_protected_content():
         st.caption("Silakan unduh file ZIP dari folder 'Pengumpulan Proposal Skripsi' terlebih dahulu. Pastikan komputer atau perangkat Anda memiliki ruang penyimpanan yang memadai.")
         st.link_button("Klik tombol ini untuk mengunduh ZIP File dari Teams :red[*]", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
         st.caption("Setelah tautan dibuka, Anda akan diarahkan ke folder OneDrive Atma Jaya: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. Di bagian atas halaman, terdapat toolbar dengan tombol _Download_. Klik tombol _Download_ untuk menyimpan file tersebut, yang akan otomatis terunduh dalam format ZIP.")
-        st.divider("gray")
+        st.divider()
         st.write("Langkah 2")
         # Unggah Data Mahasiswa RP (Excel)
         uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP:red[*]", type=["xlsx"])
@@ -96,7 +96,7 @@ def show_protected_content():
                         st.success("Data mahasiswa berhasil diupload!")
                 except Exception as e:
                     st.error(f"Error saat membaca file Excel: {e}")
-        st.divider("gray")
+        st.divider()
         st.write("Langkah 3")
         # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
         uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP) :red[*]", type=["zip"])
@@ -202,10 +202,6 @@ def show_protected_content():
                         st.download_button("Unduh Laporan (.xlsx)", f, file_name=excel_file)
                 else:
                     st.warning("Silakan upload file terlebih dahulu sebelum membuat laporan.")
-
-    with tab3:
-        st.subheader("Tindak Lanjut")
-        st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
 
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
