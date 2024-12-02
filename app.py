@@ -38,8 +38,8 @@ def login():
     if st.session_state["logged_in"]:
         return  # Prevent re-rendering login UI if already logged in
 
-    email = st.sidebar.text_input("Email :red[*]", key="login_email")
-    password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")
+    email = st.sidebar.text_input("Email:red[*]", key="login_email")
+    password = st.sidebar.text_input("Password:red[*]", type='password', key="login_password")
     st.warning("Login is required to access the system. If you are unable to proceed, please refresh the page and try logging in again.")
 
     if st.sidebar.button("Login"):
@@ -100,8 +100,8 @@ def show_protected_content():
                 except Exception as e:
                     st.error(f"Error saat membaca file Excel: {e}")
 
-        # Upload Files > Pengumpulan Proposal Skripsi (ZIP) :red[*]
-        uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP)", type=["zip"])
+        # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
+        uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP) :red[*]", type=["zip"])
 
         if uploaded_zip:
             if not check_file_size(uploaded_zip):
