@@ -72,12 +72,13 @@ def show_protected_content():
         st.subheader("Cek Kelengkapan", divider="gray")
 
         container = st.container(border=True)
-        container.write("This is inside the container")
-        st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
-        st.write("Once the link opens, it will direct you to the OneDrive Atma Jaya folder: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. At the top of the page, you will see a toolbar with a ‘Download’ button. Click the ‘Download’ button to save the file.")
+        container.write(“Silakan unduh file ZIP dari folder ‘Pengumpulan Proposal Skripsi’ terlebih dahulu. Pastikan komputer atau perangkat Anda memiliki ruang penyimpanan yang memadai.”)
+        st.link_button("Klik tombol ini untuk mengunduh ZIP File dari Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
+        st.caption(“Setelah tautan dibuka, Anda akan diarahkan ke folder OneDrive Atma Jaya: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. Di bagian atas halaman, terdapat toolbar dengan tombol ‘Download’. Klik tombol ‘Download’ untuk menyimpan file tersebut, yang akan otomatis terunduh dalam format ZIP.”)
 
         # Upload Data Mahasiswa RP (Excel)
-        uploaded_excel = st.file_uploader("Upload Data Mahasiswa RP (Excel)", type=["xlsx"])
+        uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP"), type=["xlsx"])
+        st.caption("Unggah file dengan format Excel (.xlsx)")
         students_data = {}
 
         if uploaded_excel:
