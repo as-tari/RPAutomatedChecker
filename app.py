@@ -88,8 +88,7 @@ def show_protected_content():
                     required_columns = ['KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', 'KodeDosenReviewer']
                     if not all(col in df.columns for col in required_columns):
                         st.error("File Excel harus memiliki kolom 'KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', dan 'KodeDosenReviewer'.")
-                     else:
-                        for index, row in df.iterrows():
+                     else: for index, row in df.iterrows():
                             students_data[row['KodeMahasiswa']] = {
                                 "name": row['NamaMahasiswa'],
                                 "dosen_pembimbing": row['KodeDosenPembimbing'],
