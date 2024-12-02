@@ -1,6 +1,8 @@
 import streamlit as st
 from PIL import Image
 import hashlib
+import streamlit_option_menu
+from streamlit_option_menu import option_menu
 import os
 import re
 import pandas as pd
@@ -11,7 +13,7 @@ image = Image.open('logo.png')
 st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian", divider="gray")
 
-st.title("📑 e-RP: RP Assistant System (Beta)")
+st.title("e-RP: RP Assistant System (Beta)")
 
 # Define a constant for the maximum upload size (in MB)
 MAX_UPLOAD_SIZE_MB = 5000  # 5GB
@@ -31,40 +33,33 @@ def check_hashes(password, hashed_text):
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
 
-# Login function
-st.warning("Login is required to access the system. Please try refreshing this page and log in again.")  # Notice for login required
 def login():
-   if st.session_state["logged_in"]:
-       return  # Prevent re-rendering login UI if already logged in
+    st.subheader("Login")
+    email = st.text_input("Email")
+    password = st.text_input("Password", type='password')
 
-   email = st.sidebar.text_input("Email", key="login_email")  # Use a unique key for text input
-   password = st.sidebar.text_input("Password", type='password', key="login_password")  # Use a unique key for password input
-
-   if st.sidebar.button("Login"):
-       if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
-           st.session_state["logged_in"] = True
-           st.success("Logged in successfully!")  # Show success message
-           show_protected_content()  # Show protected content immediately
-       else:
-           st.sidebar.warning("Incorrect email or password")
+    if st.button("Login"):
+        if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
+            st.session_state["logged_in"] = True
+            st.success("Logged in successfully!")
+            # Call the function to display the protected content
+            show_protected_content()
+        else:
+            st.warning("Incorrect email or password")
 
 def show_protected_content():
-    st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
+    st.title("Welcome to the Protected Page")
 
-def main():
-    # Check if the user is logged in
-    if not st.session_state["logged_in"]:
-        st.warning("Login required to access this content.")  # Notice for login required
-        login()  # Show login UI if not logged in
-    else:
-        # Show protected content if logged in
-        show_protected_content()    
-    if st.sidebar.button("Logout"):
+    if st.button("Logout"):
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
-    
-    login()  # Call the login function
-    
+
+# Main logic
+if st.session_state["logged_in"]:
+    show_protected_content()
+else:
+    login()
+
 # Validate filename against expected format
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
@@ -77,16 +72,16 @@ def validate_filename(filename, expected_format):
                              .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
     return re.match(pattern, filename) is not None
 
+# Main application logic
 def main():
     if "authenticated" not in st.session_state:
         st.session_state["authenticated"] = False
 
     if not st.session_state["authenticated"]:
-        login()  # Only call login if not authenticated
+        login()
     else:
         home_page()
         instructions_page()
-        upload_page()
 
 def home_page():
     st.title("📑 RP Automated Checker")
@@ -113,7 +108,7 @@ def upload_page():
     st.subheader("Cek Kelengkapan Berkas")
 
     # Download ZIP File from Teams
-    st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
+    st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/P engumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
     st.write("Once the link opens, it will direct you to the OneDrive Atma Jaya folder: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. At the top of the page, you will see a toolbar with a ‘Download’ button. Click the ‘Download’ button to save the file.")
 
     # Upload Data Mahasiswa RP (Excel)
@@ -198,9 +193,9 @@ def upload_page():
                                 remarks.append(f"Nama file '{filename}' tidak sesuai format. Seharusnya mengikuti format: 'KodeMahasiswa_KodeDosenPembimbing_DosenPembimbing.docx'.")
                         elif "Dosen Reviewer" in filename:
                             if validate_filename(filename, "KodeMahasiswa_KodeDosenReviewer_DosenReviewer.docx"):
-                                submitted_status[" proposal reviewer"] = True
+                                submitted_status["proposal reviewer"] = True
                             else:
-                                remarks.append(f"Nama file '{filename}' tidak sesuai format. Seharusnya mengikuti format: 'KodeMahasiswa_KodeDosenReviewer_DosenReviewer.docx'.")
+                                remarks.append(f"Nama file '{filename}' tidak sesuai format. Seharusnya mengikuti format: 'KodeMahasiswa_KodeD osenReviewer_DosenReviewer.docx'.")
                         elif "Lembar Pemantauan Bimbingan" in filename:
                             if validate_filename(filename, "KodeMahasiswa_NamaLengkapMahasiswa_LembarPemantauanBimbingan.pdf"):
                                 submitted_status["logbook"] = True
