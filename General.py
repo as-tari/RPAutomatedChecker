@@ -36,9 +36,9 @@ def login():
    if st.session_state["logged_in"]:
        return  # Prevent re-rendering login UI if already logged in
 
-   st.sidebar.subheader("Login")
    email = st.sidebar.text_input("Email", key="login_email")  # Use a unique key for text input
    password = st.sidebar.text_input("Password", type='password', key="login_password")  # Use a unique key for password input
+        st.warning("Login required to access this content.")  # Notice for login required
 
    if st.sidebar.button("Login"):
        if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
