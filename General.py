@@ -51,20 +51,6 @@ def login():
 def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
 
-# Main application logic
-def main():
-    if st.session_state["logged_in"]:
-        # Logout button
-        if st.sidebar.button("Logout"):  # Logout button
-            st.session_state["logged_in"] = False
-            st.success("Logged out successfully!")
-    else:
-        st.warning("Login is required to access the system. Please try refreshing this page and log in again.")  # Notice for login required
-        login()  # Show login UI if not logged in
-
-if __name__ == "__main__":
-    main()
-    
 # Validate filename against expected format
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
@@ -76,6 +62,17 @@ def validate_filename(filename, expected_format):
                              .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
                              .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
     return re.match(pattern, filename) is not None
+
+def main():
+    if "authenticated" not in st.session_state:
+        st.session_state["authenticated"] = False
+
+    if not st.session_state["authenticated"]:
+        login()  # Only call login if not authenticated
+    else:
+        home_page()
+        instructions_page()
+        upload_page()
 
 def home_page():
     st.title("📑 RP Automated Checker")
