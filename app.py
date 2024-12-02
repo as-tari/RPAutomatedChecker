@@ -60,28 +60,16 @@ def login():
 
 def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
-    if st.sidebar.button("Logout"):
-        st.session_state["logged_in"] = False
-        st.success("Logged out successfully!")
-        show_protected_content()
-        tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kel engkapan", "Tindak Lanjut"])
+    
+    # Menambahkan tab setelah pesan sambutan
+    tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
 
-        with tab1:
-            st.subheader("Dasbor")
+    with tab1:
+        st.subheader("Dasbor")
+        st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
 
-        with tab2:
-            st.subheader("Cek Kelengkapan", divider="gray")
-            
-            def validate_filename(filename, expected_format):
-                pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
-                                         .replace("KodeDosenPembimbing", r"\w") \
-                                         .replace("DosenPembimbing", r"\w+(\s\w+)*") \
-                                         .replace("KodeDosenReviewer", r"\w") \
-                                         .replace("DosenReviewer", r"\w+(\s\w+)*") \
-                                         .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
-                                         .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
-                                         .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
-                return re.match(pattern, filename) is not None
+    with tab2:
+        st.subheader("Cek Kelengkapan", divider="gray")
                 
             st.markdown("Download ZIP File from Teams")
             st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
@@ -216,8 +204,27 @@ def show_protected_content():
                 else:
                     st.warning("Silakan upload file terlebih dahulu sebelum membuat laporan.")
 
+
         with tab3:
             st.subheader("Tindak Lanjut")
+            st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+
+def validate_filename(filename, expected_format):
+    pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
+                             .replace("KodeDosenPembimbing", r"\w") \
+                             .replace("DosenPembimbing", r"\w+(\s\w+)*") \
+                             .replace("KodeDosenReviewer", r"\w") \
+                             .replace("DosenReviewer", r"\w+(\s\w+)*") \
+                             .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
+                             .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
+                             .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
+    return re.match(pattern, filename) is not None
+
+def main():
+    if not st.session_state["logged_in"]:
+        login()  # Call the login function if not logged in
+    else:
+        show_protected_content()
 
 if __name__ == "__main__":
     main()
