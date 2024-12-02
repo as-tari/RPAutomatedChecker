@@ -48,7 +48,7 @@ def login():
        else:
            st.sidebar.warning("Incorrect email or password")
            
-    if st.button("Logout"):
+    if st.sidebar.button("Logout"):
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
 
