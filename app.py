@@ -13,7 +13,7 @@ try:
 except Exception as e:
     st.error(f"Error loading logo: {e}")
 
-st.sidebar.subheader("PSL 401 Rancangan Penelitian", divider="gray")
+st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 st.title("📑 e-RP: RP Assistant System (Beta)")
 
 # Define a constant for the maximum upload size (in MB)
@@ -69,7 +69,7 @@ def show_protected_content():
         st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
 
     with tab2:
-        st.subheader("Cek Kelengkapan", divider="gray")
+        st.subheader("Cek Kelengkapan")
         st.write("Langkah 1")
         st.caption("Silakan unduh file ZIP dari folder 'Pengumpulan Proposal Skripsi' terlebih dahulu. Pastikan komputer atau perangkat Anda memiliki ruang penyimpanan yang memadai.")
         st.link_button("Klik tombol ini untuk mengunduh ZIP File dari Teams :red[*]", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
