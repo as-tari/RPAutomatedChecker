@@ -60,7 +60,8 @@ def show_protected_content():
     if st.sidebar.button("Logout"):  # Logout button
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
-        
+
+show_protected_content()
 tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
 
 with tab1:
