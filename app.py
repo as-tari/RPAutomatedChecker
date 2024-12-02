@@ -78,7 +78,7 @@ def show_protected_content():
 
         # Upload Data Mahasiswa RP (Excel)
         uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP", type=["xlsx"])
-        st.caption(Unggah file dengan format Excel (.xlsx))
+        st.caption("Unggah file dengan format Excel (.xlsx)")
         students_data = {}
 
         if uploaded_excel:
