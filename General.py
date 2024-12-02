@@ -31,21 +31,23 @@ def check_hashes(password, hashed_text):
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
 
+# Login function
 def login():
-    if st.session_state["logged_in"]:
-        return  # Prevent re-rendering login UI if already logged in
+   if st.session_state["logged_in"]:
+       return  # Prevent re-rendering login UI if already logged in
 
-    st.subheader("Login")
-    email = st.text_input("Email", key="login_email")  # Use a unique key for text input
-    password = st.text_input("Password", type='password', key="login_password")  # Use a unique key for password input
+   st.sidebar.subheader("Login")
+   email = st.sidebar.text_input("Email", key="login_email")  # Use a unique key for text input
+   password = st.sidebar.text_input("Password", type='password', key="login_password")  # Use a unique key for password input
 
-    if st.button("Login"):
-        if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
-            st.session_state["logged_in"] = True
-            st.success("Logged in successfully!")
-            show_protected_content() # Call the function to display the protected content
-        else:
-            st.warning("Incorrect email or password")
+   if st.sidebar.button("Login"):
+       if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
+           st.session_state["logged_in"] = True
+           st.success("Logged in successfully!")  # Show success message
+           show_protected_content()  # Show protected content immediately
+       else:
+           st.sidebar.warning("Incorrect email or password")
+           
     if st.button("Logout"):
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
