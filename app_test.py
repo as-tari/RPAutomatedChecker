@@ -65,7 +65,9 @@ def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
     if st.sidebar.button("Logout"):  # Logout button
         st.session_state["logged_in"] = False
-        st.success("Logged out successfully!")    
+        st.success("Logged out successfully!")
+    else:
+        show_protected_content()
 
         tab1, tab2 = st.tabs(["Cek Kelengkapan", "Fitur Lainnya"])
     
