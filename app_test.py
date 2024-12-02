@@ -67,10 +67,7 @@ def show_protected_content():
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
     else:
-        show_protected_content()
-
         tab1, tab2 = st.tabs(["Cek Kelengkapan", "Fitur Lainnya"])
-    
         with tab1:
             st.write("Langkah 1")
             st.caption("Silakan unduh file ZIP dari folder 'Pengumpulan Proposal Skripsi' terlebih dahulu. Pastikan komputer atau perangkat Anda memiliki ruang penyimpanan yang memadai.")
