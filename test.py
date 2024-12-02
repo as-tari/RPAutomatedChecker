@@ -37,6 +37,7 @@ def login():
 
     email = st.sidebar.text_input("Email :red[*]", key="login_email")  # Use a unique key for text input
     password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")  # Use a unique key for password input
+    st.warning("Login is required to access the system. Please try refreshing this page and log in again.")
 
     if st.sidebar.button("Login"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
@@ -45,7 +46,6 @@ def login():
             show_protected_content()
 
         # Check if both email and password are empty
-        st.warning("Login is required to access the system. Please try refreshing this page and log in again.")
         if not email.strip() and not password.strip():
             st.warning("Both email and password are required to log in. Please enter your credentials.")
         elif not email.strip():
