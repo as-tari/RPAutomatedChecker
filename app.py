@@ -38,8 +38,8 @@ def login():
     if st.session_state["logged_in"]:
         return  # Prevent re-rendering login UI if already logged in
 
-    email = st.sidebar.text_input("Email:red[*]", key="login_email")
-    password = st.sidebar.text_input("Password:red[*]", type='password', key="login_password")
+    email = st.sidebar.text_input("Email :red[*]", key="login_email")
+    password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")
     st.warning("Login is required to access the system. If you are unable to proceed, please refresh the page and try logging in again.")
 
     if st.sidebar.button("Login"):
