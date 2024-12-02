@@ -82,7 +82,7 @@ def main():
             students_data = {}
 
             if uploaded_excel:
-                if not check _file_size(uploaded_excel):
+                if not check_file_size(uploaded_excel):
                     st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
                 else:
                     try:
