@@ -62,10 +62,9 @@ def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
     
     # Menambahkan tab setelah pesan sambutan
-    st.tabs(["Cek Kelengkapan"])
+    tab 1 == st.tabs(["Cek Kelengkapan"])
 
-    with tab2:
-        st.subheader("Cek Kelengkapan")
+    with tab1:
         st.write("Langkah 1")
         st.caption("Silakan unduh file ZIP dari folder 'Pengumpulan Proposal Skripsi' terlebih dahulu. Pastikan komputer atau perangkat Anda memiliki ruang penyimpanan yang memadai.")
         st.link_button("Klik tombol ini untuk mengunduh ZIP File dari Teams :red[*]", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
