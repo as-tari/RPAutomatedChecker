@@ -16,13 +16,6 @@ except Exception as e:
 st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 st.title("📑 e-RP: RP Assistant System (Beta)")
 
-# Define a constant for the maximum upload size (in MB)
-STREAMLIT_SERVER_MAX_UPLOAD_SIZE_MB = 5000  # 5GB
-
-# Function to check file size
-def check_file_size(file):
-    return file.size <= MAX_UPLOAD_SIZE_MB * 1024 * 1024  # Convert MB to bytes
-
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
 
