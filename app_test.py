@@ -18,7 +18,7 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 st.title("📑 e-RP: RP Assistant System (Beta)")
 
 # Set the maximum upload size for Streamlit
-STREAMLIT_SERVER_MAX_UPLOAD_SIZE_MB = 4000  # 4GB
+STREAMLIT_SERVER_MAX_UPLOAD_SIZE_MB = 1000  # 4GB
 
 def check_file_size(uploaded_file):
     if uploaded_file is not None:
