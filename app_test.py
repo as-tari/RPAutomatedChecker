@@ -210,7 +210,7 @@ def show_protected_content():
                             st.download_button("Unduh Laporan (.xlsx)", f, file_name=excel_file)
                     else:
                         st.warning("Pembuatan laporan gagal. Silakan mengunggah dokumen kembali.")
----
+
 @st.cache_data
 def uploaded_excel(x):
     return x**2
