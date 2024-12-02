@@ -20,7 +20,7 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 st.title("📑 e-RP Assistant System (Beta)")
 
 # Set the maximum upload size for Streamlit
-STREAMLIT_SERVER_MAX_UPLOAD_SIZE_MB = 1000  # 4GB
+STREAMLIT_SERVER_MAX_UPLOAD_SIZE_MB = 1000 
 
 def check_file_size(uploaded_file):
     if uploaded_file is not None:
@@ -109,7 +109,7 @@ def show_protected_content():
             st.divider()
             st.write("Langkah 3")
             
-            # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
+            # Upload Folder Pengumpulan Proposal Skripsi (ZIP)
             uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP) :red[*]", type=["zip"])
             st.divider()
             st.warning(":warning: Laporan akan dihasilkan secara otomatis. Pastikan file yang Anda unggah sudah benar dan sesuai format yang diminta.")
