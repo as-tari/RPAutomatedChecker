@@ -44,16 +44,16 @@ def login():
             st.session_state["logged_in"] = True
             st.success("Logged in successfully!")  # Show success message
             show_protected_content()
-
-        # Check if both email and password are empty
-        if not email.strip() and not password.strip():
-            st.warning("Both email and password are required to log in. Please enter your credentials.")
-        elif not email.strip():
-            st.warning("Email is required to log in. Please enter your email.")
-        elif not password.strip():
-            st.warning("Password is required to log in. Please enter your password.")
         else:
             st.sidebar.warning("Incorrect email or password")
+
+        # Check if both email and password are empty
+        if email.strip() and not password.strip():
+            st.warning("Both email and password are required to log in. Please enter your credentials.")
+        if email.strip():
+            st.warning("Email is required to log in. Please enter your email.")
+        if password.strip():
+            st.warning("Password is required to log in. Please enter your password.")
 
 def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
