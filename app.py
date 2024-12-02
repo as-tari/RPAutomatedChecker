@@ -17,7 +17,7 @@ st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 st.title("📑 e-RP: RP Assistant System (Beta)")
 
 # Define a constant for the maximum upload size (in MB)
-MAX_UPLOAD_SIZE_MB = 5000  # 5GB
+export STREAMLIT_SERVER_MAX_UPLOAD_SIZE_MB = 5000  # 5GB
 
 # Function to check file size
 def check_file_size(file):
