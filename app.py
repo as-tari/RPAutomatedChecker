@@ -40,7 +40,7 @@ def login():
 
     email = st.sidebar.text_input("Email :red[*]", key="login_email")
     password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")
-    st.warning("Login is required to access the system. Please refresh the page and try logging in again.")
+    st.warning("Login is required to access the system. If you are unable to proceed, please refresh the page and try logging in again.")
 
     if st.sidebar.button("Login"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
