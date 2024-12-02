@@ -71,33 +71,33 @@ def show_protected_content():
     with tab2:
         st.subheader("Cek Kelengkapan", divider="gray")
                 
-            st.markdown("Download ZIP File from Teams")
-            st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
-            st.write("Once the link opens, it will direct you to the OneDrive Atma Jaya folder: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. At the top of the page, you will see a toolbar with a ‘Download’ button. Click the ‘Download’ button to save the file.")
+        st.markdown("Download ZIP File from Teams")
+        st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
+        st.write("Once the link opens, it will direct you to the OneDrive Atma Jaya folder: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. At the top of the page, you will see a toolbar with a ‘Download’ button. Click the ‘Download’ button to save the file.")
 
-            # Upload Data Mahasiswa RP (Excel)
-            uploaded_excel = st.file_uploader("Upload Data Mahasiswa RP (Excel)", type=["xlsx"])
-            students_data = {}
+        # Upload Data Mahasiswa RP (Excel)
+        uploaded_excel = st.file_uploader("Upload Data Mahasiswa RP (Excel)", type=["xlsx"])
+        students_data = {}
 
-            if uploaded_excel:
-                if not check_file_size(uploaded_excel):
-                    st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
-                else:
-                    try:
-                        df = pd.read_excel(uploaded_excel)
-                        required_columns = ['KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', 'KodeDosenReviewer']
-                        if not all(col in df.columns for col in required_columns):
-                            st.error("File Excel harus memiliki kolom 'KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', dan 'KodeDosenReviewer'.")
-                        else:
-                            for index, row in df.iterrows():
-                                students_data[row['KodeMahasiswa']] = {
-                                    "name": row['NamaMahasiswa'],
-                                    "dosen_pembimbing": row['KodeDosenPembimbing'],
-                                    "dosen_reviewer": row['KodeDosenReviewer']
-                                }
-                            st.success("Data mahasiswa berhasil diupload!")
-                    except Exception as e:
-                        st.error(f"Error saat membaca file Excel: {e}")
+        if uploaded_excel:
+            if not check_file_size(uploaded_excel):
+                st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
+            else:
+                 try:
+                    df = pd.read_excel(uploaded_excel)
+                    required_columns = ['KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', 'KodeDosenReviewer']
+                    if not all(col in df.columns for col in required_columns):
+                        st.error("File Excel harus memiliki kolom 'KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', dan 'KodeDosenReviewer'.")
+                     else:
+                        for index, row in df.iterrows():
+                            students_data[row['KodeMahasiswa']] = {
+                                "name": row['NamaMahasiswa'],
+                                "dosen_pembimbing": row['KodeDosenPembimbing'],
+                                "dosen_reviewer": row['KodeDosenReviewer']
+                            }
+                        st.success("Data mahasiswa berhasil diupload!")
+                except Exception as e:
+                    st.error(f"Error saat membaca file Excel: {e}")
 
             # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
             uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP)", type=["zip"])
