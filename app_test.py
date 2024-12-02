@@ -227,7 +227,7 @@ def show_protected_content():
     
         
         with tab2:
-            st.write("More features coming soon")
+            st.info("More features coming soon")
         
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
