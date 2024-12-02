@@ -170,7 +170,8 @@ def main():
 
                                 if "Dosen Pembimbing" in filename:
                                     if validate_filename(filename, "KodeMahasiswa_KodeDosenPembimbing_DosenPembimbing.docx"):
-                                        submitted_status["proposal pembimbing"] = True else:
+                                        submitted_status["proposal pembimbing"] = True 
+                                    else:
                                         remarks.append(f"Nama file '{filename}' tidak sesuai format. Seharusnya mengikuti format: 'KodeMahasiswa_KodeDosenPembimbing_DosenPembimbing.docx'.")
                                 elif "Dosen Reviewer" in filename:
                                     if validate_filename(filename, "KodeMahasiswa_KodeDosenReviewer_DosenReviewer.docx"):
