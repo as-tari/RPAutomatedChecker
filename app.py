@@ -7,10 +7,13 @@ import pandas as pd
 import zipfile
 
 # Display the logo in the sidebar
-image = Image.open('logo.png')
-st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
-st.sidebar.subheader("PSL 401 Rancangan Penelitian", divider="gray")
+try:
+    image = Image.open('logo.png')
+    st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
+except Exception as e:
+    st.error(f"Error loading logo: {e}")
 
+st.sidebar.subheader("PSL 401 Rancangan Penelitian", divider="gray")
 st.title("📑 e-RP: RP Assistant System (Beta)")
 
 # Define a constant for the maximum upload size (in MB)
@@ -35,36 +38,48 @@ def login():
     if st.session_state["logged_in"]:
         return  # Prevent re-rendering login UI if already logged in
 
-    email = st.sidebar.text_input("Email :red[*]", key="login_email")  # Use a unique key for text input
-    password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")  # Use a unique key for password input
+    email = st.sidebar.text_input("Email :red[*]", key="login_email")
+    password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")
     st.warning("Login is required to access the system. Please try refreshing this page and log in again.")
 
     if st.sidebar.button("Login"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
             st.session_state["logged_in"] = True
-            st.success("Logged in successfully!")  # Show success message
+            st.success("Logged in successfully!")
             show_protected_content()
         else:
             st.sidebar.warning("Incorrect email or password")
 
         # Check if both email and password are empty
         if not email.strip() and not password.strip():
-            st.warning("Both email and password are required to log in. Please enter your credentials.")
+            st.warning("Both email and password are required to log in.")
         elif not email.strip():
-            st.warning("Email is required to log in. Please enter your email.")
+            st.warning("Email is required.")
         elif not password.strip():
-            st.warning("Password is required to log in. Please enter your password.")
+            st.warning("Password is required.")
 
 def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
-    if st.sidebar.button("Logout"):  # Logout button
+    if st.sidebar.button("Logout"):
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
+
+def validate_filename(filename, expected_format):
+    pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
+                             .replace("KodeDosenPembimbing", r"\w") \
+                             .replace("DosenPembimbing", r"\w+(\s\w+)*") \
+                             .replace("KodeDosenReviewer", r"\w") \
+                             .replace("DosenReviewer", r"\w+(\s\w+)*") \
+                             .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
+                             .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
+                             .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
+    return re.match(pattern, filename) is not None
 
 def main():
     if st.session_state["logged_in"]:
         show_protected_content()
-        tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
+        tab1, tab2, tab ```python
+        tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
 
         with tab1:
             st.subheader("Dasbor")
@@ -153,7 +168,7 @@ def main():
                                     remarks.append(f"File '{filename}' diupload di folder yang salah. Seharusnya di folder '{expected_folder_reviewer}'.")
 
                                 if "Dosen Pembimbing" in filename:
-                                    if validate_filename(filename, "KodeMahasiswa_KodeDosenPembimbing_DosenPembimbing.docx"):
+                                    if validate_filename(filename, "KodeMahasiswa_KodeDosenPembimbing _DosenPembimbing.docx"):
                                         submitted_status["proposal pembimbing"] = True
                                     else:
                                         remarks.append(f"Nama file '{filename}' tidak sesuai format. Seharusnya mengikuti format: 'KodeMahasiswa_KodeDosenPembimbing_DosenPembimbing.docx'.")
@@ -168,7 +183,7 @@ def main():
                                     else:
                                         remarks.append(f"Nama file '{filename}' tidak sesuai format. Seharusnya mengikuti format: 'KodeMahasiswa_NamaLengkapMahasiswa_LembarPemantauanBimbingan.pdf'.")
                                 elif "Rencana Kerja Penulisan Skripsi" in filename:
-                                    if validate_filename(filename, "KodeMahasiswa_NamaLengkapMahasiswa_RencanaKerjaPenul ulisanSkripsi.pdf"):
+                                    if validate_filename(filename, "KodeMahasiswa_NamaLengkapMahasiswa_RencanaKerjaPenulisanSkripsi.pdf"):
                                         submitted_status["rencana kerja"] = True
                                     else:
                                         remarks.append(f"Nama file '{filename}' tidak sesuai format. Seharusnya mengikuti format: 'KodeMahasiswa_NamaLengkapMahasiswa_RencanaKerjaPenulisanSkripsi.pdf'.")
@@ -210,16 +225,5 @@ def main():
             st.subheader("Tindak Lanjut")
             st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
 
-def validate_filename(filename, expected_format):
-    pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
-                             .replace("KodeDosenPembimbing", r"\w") \
-                             .replace("DosenPembimbing", r"\w+(\s\w+)*") \
-                             .replace("KodeDosenReviewer", r"\w") \
-                             .replace("DosenReviewer", r"\w+(\s\w+)*") \
-                             .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
-                             .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
-                             .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
-    return re.match(pattern, filename) is not None
-
 if __name__ == "__main__":
- main()
+    main()
