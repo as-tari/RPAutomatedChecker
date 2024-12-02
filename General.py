@@ -42,7 +42,7 @@ def login():
     if st.button("Login"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
             st.session_state["logged_in"] = True
-            st.success("Logged in successfully!",on_click=show_protected_content()) # Call the function to display the protected content
+            st.success("Logged in successfully!",on_click=show_protected_content) # Call the function to display the protected content
         else:
             st.warning("Incorrect email or password")
     if st.button("Logout"):
