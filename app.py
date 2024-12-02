@@ -77,7 +77,7 @@ def show_protected_content():
         st.caption(Setelah tautan dibuka, Anda akan diarahkan ke folder OneDrive Atma Jaya: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. Di bagian atas halaman, terdapat toolbar dengan tombol _Download_. Klik tombol _Download_ untuk menyimpan file tersebut, yang akan otomatis terunduh dalam format ZIP.)
 
         # Upload Data Mahasiswa RP (Excel)
-        uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP"), type=["xlsx"])
+        uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP"), type=["xlsx"]
         st.caption(Unggah file dengan format Excel (.xlsx))
         students_data = {}
 
