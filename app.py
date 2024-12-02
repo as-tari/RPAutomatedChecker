@@ -62,7 +62,7 @@ def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
     
     # Menambahkan tab setelah pesan sambutan
-    tab 1 = st.tabs(["Cek Kelengkapan"])
+    tab1, tab2 = st.tabs(["Cek Kelengkapan", "Fitur Lainnya"])
 
     with tab1:
         st.write("Langkah 1")
@@ -201,7 +201,10 @@ def show_protected_content():
                         st.download_button("Unduh Laporan (.xlsx)", f, file_name=excel_file)
                 else:
                     st.warning("Silakan upload file terlebih dahulu sebelum membuat laporan.")
-
+   
+    with tab2:
+        st.write("Coming soon")
+        
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
                              .replace("KodeDosenPembimbing", r"\w") \
