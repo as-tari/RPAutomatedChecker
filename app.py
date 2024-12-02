@@ -16,6 +16,12 @@ except Exception as e:
 st.sidebar.subheader("PSL 401 Rancangan Penelitian")
 st.title("📑 e-RP: RP Assistant System (Beta)")
 
+def check_file_size(uploaded_file):
+    if uploaded_file is not None:
+        # Check the size of the uploaded file
+        return uploaded_file.size <= (STREAMLIT_SERVER_MAX_UPLOAD_SIZE_MB * 1024 * 1024)  # Convert MB to bytes
+    return False
+
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
 
