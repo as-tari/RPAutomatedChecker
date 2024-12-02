@@ -100,7 +100,7 @@ def show_protected_content():
         # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
         uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP) :red[*]", type=["zip"])
         st.divider()
-        st.write("Laporan akan dihasilkan secara otomatis. Pastikan file yang Anda unggah sudah benar dan sesuai format yang diminta.")
+        st.write(":warning: Laporan akan dihasilkan secara otomatis. Pastikan file yang Anda unggah sudah benar dan sesuai format yang diminta.")
         if uploaded_zip:
             if not check_file_size(uploaded_zip):
                 st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
