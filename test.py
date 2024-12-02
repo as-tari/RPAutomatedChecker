@@ -18,7 +18,7 @@ MAX_UPLOAD_SIZE_MB = 5000  # 5GB
 
 # Function to check file size
 def check_file_size(file):
-    return file.size <= MAX_UPLOAD_SIZE_MB * 1024 * 1024  # Convert MB to bytes
+    return file.size <= MAX_UPLOAD_SIZE_MB
 
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
