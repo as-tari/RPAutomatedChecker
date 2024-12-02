@@ -52,6 +52,13 @@ def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
 
 def main():
+    # Check if the user is logged in
+    if not st.session_state["logged_in"]:
+        st.warning("Login required to access this content.")  # Notice for login required
+        login()  # Show login UI if not logged in
+    else:
+        # Show protected content if logged in
+        show_protected_content()    
     if st.sidebar.button("Logout"):
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
