@@ -38,7 +38,7 @@ def login():
     email = st.sidebar.text_input("Email", key="login_email")  # Use a unique key for text input
     password = st.sidebar.text_input("Password", type='password', key="login_password")  # Use a unique key for password input
 
-    if st.sidebar.button("Login,:red"*"):
+    if st.sidebar.button("Login :red[*]"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
             st.session_state["logged_in"] = True
             st.success("Logged in successfully!")  # Show success message
