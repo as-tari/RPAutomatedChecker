@@ -40,7 +40,7 @@ def login():
 
     email = st.sidebar.text_input("Email :red[*]", key="login_email")
     password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")
-    st.warning("Login is required to access the system. Please try refreshing this page and log in again.")
+    st.warning("Login is required to access the system.")
 
     if st.sidebar.button("Login"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
@@ -76,9 +76,11 @@ def validate_filename(filename, expected_format):
     return re.match(pattern, filename) is not None
 
 def main():
-    if st.session_state["logged_in"]:
+    if not st.session_state["logged_in"]:
+        login()  # Call the login function if not logged in
+    else:
         show_protected_content()
-        tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
+        tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kel engkapan", "Tindak Lanjut"])
 
         with tab1:
             st.subheader("Dasbor")
@@ -167,9 +169,8 @@ def main():
                                     remarks.append(f"File '{filename}' diupload di folder yang salah. Seharusnya di folder '{expected_folder_reviewer}'.")
 
                                 if "Dosen Pembimbing" in filename:
-                                    if validate_filename(filename, "KodeMahasiswa_KodeDosenPembimbing _DosenPembimbing.docx"):
-                                        submitted_status["proposal pembimbing"] = True
-                                    else:
+                                    if validate_filename(filename, "KodeMahasiswa_KodeDosenPembimbing_DosenPembimbing.docx"):
+                                        submitted_status["proposal pembimbing"] = True else:
                                         remarks.append(f"Nama file '{filename}' tidak sesuai format. Seharusnya mengikuti format: 'KodeMahasiswa_KodeDosenPembimbing_DosenPembimbing.docx'.")
                                 elif "Dosen Reviewer" in filename:
                                     if validate_filename(filename, "KodeMahasiswa_KodeDosenReviewer_DosenReviewer.docx"):
