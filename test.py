@@ -39,13 +39,13 @@ def login():
     password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")  # Use a unique key for password input
 
     if st.sidebar.button("Login"):
-    st.warning("Login is required to access the system. Please try refreshing this page and log in again.")
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
             st.session_state["logged_in"] = True
             st.success("Logged in successfully!")  # Show success message
             show_protected_content()
 
         # Check if both email and password are empty
+        st.warning("Login is required to access the system. Please try refreshing this page and log in again.")
         if not email.strip() and not password.strip():
             st.warning("Both email and password are required to log in. Please enter your credentials.")
         elif not email.strip():
