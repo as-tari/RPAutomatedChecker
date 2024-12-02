@@ -70,11 +70,12 @@ def show_protected_content():
 
     with tab2:
         st.subheader("Cek Kelengkapan", divider="gray")
+        st.write("Langkah 1")
         st.caption("Silakan unduh file ZIP dari folder 'Pengumpulan Proposal Skripsi' terlebih dahulu. Pastikan komputer atau perangkat Anda memiliki ruang penyimpanan yang memadai.")
         st.link_button("Klik tombol ini untuk mengunduh ZIP File dari Teams :red[*]", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
         st.caption("Setelah tautan dibuka, Anda akan diarahkan ke folder OneDrive Atma Jaya: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. Di bagian atas halaman, terdapat toolbar dengan tombol _Download_. Klik tombol _Download_ untuk menyimpan file tersebut, yang akan otomatis terunduh dalam format ZIP.")
 
-        # Upload Data Mahasiswa RP (Excel)
+        # Upload Data Mahasiswa RP (Excel) :red[*]
         uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP", type=["xlsx"])
         st.caption("Unggah file dengan format Excel (.xlsx)")
         students_data = {}
@@ -99,7 +100,7 @@ def show_protected_content():
                 except Exception as e:
                     st.error(f"Error saat membaca file Excel: {e}")
 
-        # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
+        # Upload Files > Pengumpulan Proposal Skripsi (ZIP) :red[*]
         uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP)", type=["zip"])
 
         if uploaded_zip:
