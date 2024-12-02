@@ -64,44 +64,10 @@ def show_protected_content():
 tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
 
 with tab1:
-    st.header("A cat")
+    st.subheader("Dasbor")
     st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
 with tab2:
-    st.header("A dog")
-    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
-with tab3:
-    st.header("An owl")
-    st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
-    
-def validate_filename(filename, expected_format):
-    pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
-                             .replace("KodeDosenPembimbing", r"\w") \
-                             .replace("DosenPembimbing", r"\w+(\s\w+)*") \
-                             .replace("KodeDosenReviewer", r"\w") \
-                             .replace("DosenReviewer", r"\w+(\s\w+)*") \
-                             .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
-                             .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
-                             .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
-    return re.match(pattern, filename) is not None
-
-def instructions_page():
-    st.markdown("Silakan unggah data dan dokumen Anda di bawah ini.")
-    st.subheader("1. Upload Student Data (Unggah Data Mahasiswa)")
-    st.write("• Click on the “Upload Data” section on the homepage.")
-    st.write("• Select the Excel file containing student data.")
-
-    st.subheader("2. Upload Document Bundle (Unggah Bundle Dokumen)")
-    st.write("• After uploading the student data, upload the document bundle in ZIP format.")
-
-    st.subheader("3. Check Document Completeness (Cek Kelengkapan Berkas Mahasiswa)")
-    st.write("• Click the “Check Document Completeness” button after both files are uploaded.")
-
-    st.subheader("4. Download Report (Unduh Laporan)")
-    st.write("• After the verification process is complete, the document status report will be displayed.")
-
-def upload_page():
-    st.header("Pengumpulan Proposal Skripsi")
-    st.subheader("Cek Kelengkapan Berkas",divider="gray")
+    st.subheader("Cek Kelengkapan",divider="gray")
 
     st.markdown("Download ZIP File from Teams")
     st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
@@ -235,6 +201,22 @@ def upload_page():
                 st.download_button("Unduh Laporan (.xlsx)", f, file_name=excel_file)
         else:
             st.warning("Silakan upload file terlebih dahulu sebelum membuat laporan.")
+
+with tab3:
+    st.subheader("Tindak Lanjut")
+    st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+    
+def validate_filename(filename, expected_format):
+    pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
+                             .replace("KodeDosenPembimbing", r"\w") \
+                             .replace("DosenPembimbing", r"\w+(\s\w+)*") \
+                             .replace("KodeDosenReviewer", r"\w") \
+                             .replace("DosenReviewer", r"\w+(\s\w+)*") \
+                             .replace("NamaLengkapMahasiswa", r"\w+(\s\w+)*") \
+                             .replace("LembarPemantauanBimbingan", r"Lembar Pemantauan Bimbingan") \
+                             .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
+    return re.match(pattern, filename) is not None
+
 
 if __name__ == "__main__":
     main()
