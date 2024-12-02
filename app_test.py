@@ -7,7 +7,7 @@ import pandas as pd
 import zipfile
 import time
 
-st.set_page_config(page_title="e-RP: RP Assistant System")
+st.set_page_config(page_title="e-RP Assistant System")
 
 # Display the logo in the sidebar
 try:
@@ -17,7 +17,7 @@ except Exception as e:
     st.error(f"Error loading logo: {e}")
 
 st.sidebar.subheader("PSL 401 Rancangan Penelitian")
-st.title("📑 e-RP: RP Assistant System (Beta)")
+st.title("📑 e-RP Assistant System (Beta)")
 
 # Set the maximum upload size for Streamlit
 STREAMLIT_SERVER_MAX_UPLOAD_SIZE_MB = 1000  # 4GB
