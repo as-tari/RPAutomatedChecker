@@ -63,7 +63,7 @@ def show_protected_content():
     if st.sidebar.button("Logout"):  # Logout button
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")    
-    # Menambahkan tab setelah pesan sambutan
+
     tab1, tab2 = st.tabs(["Cek Kelengkapan", "Fitur Lainnya"])
 
     with tab1:
