@@ -47,13 +47,16 @@ def login():
            show_protected_content()  # Show protected content immediately
        else:
            st.sidebar.warning("Incorrect email or password")
-           
-    if st.sidebar.button("Logout"):
-        st.session_state["logged_in"] = False
-        st.success("Logged out successfully!")
 
 def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
+
+def main():
+    if st.sidebar.button("Logout"):
+        st.session_state["logged_in"] = False
+        st.success("Logged out successfully!")
+    
+    login()  # Call the login function
 
 # Validate filename against expected format
 def validate_filename(filename, expected_format):
