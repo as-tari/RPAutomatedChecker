@@ -45,7 +45,6 @@ def login():
            st.session_state["logged_in"] = True
            st.success("Logged in successfully!")  # Show success message
            show_protected_content()  # Show protected content immediately
-           st.experimental_rerun()  # Refresh halaman setelah login berhasil
        else:
            st.sidebar.warning("Incorrect email or password")
 
