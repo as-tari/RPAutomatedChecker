@@ -52,9 +52,6 @@ def login():
             st.warning("Email is required to log in. Please enter your email.")
         elif not password.strip():
             st.warning("Password is required to log in. Please enter your password.")
-        elif check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
-            st.session_state["logged_in"] = True
-            st.success("Logged in successfully!")  # Show success message
         else:
             st.sidebar.warning("Incorrect email or password")
 
