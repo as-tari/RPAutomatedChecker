@@ -4,3 +4,6 @@ base = "light"
 primaryColor = "#5c6bc0"
 textColor = "#000000"
 font = "sans serif"
+
+[server]
+maxUploadSize = 4000
