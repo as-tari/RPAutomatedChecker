@@ -11,7 +11,7 @@ st.set_page_config(page_title="e-RP: RP Assistant System")
 
 # Display the logo in the sidebar
 try:
-    image = Image.open('logo.png')
+    image = Image.open('images/logo.png')
     st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
 except Exception as e:
     st.error(f"Error loading logo: {e}")
