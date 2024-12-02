@@ -38,7 +38,7 @@ def login():
     email = st.sidebar.text_input("Email", key="login_email")  # Use a unique key for text input
     password = st.sidebar.text_input("Password", type='password', key="login_password")  # Use a unique key for password input
 
-    if st.sidebar.button("Login,red:[*]"):
+    if st.sidebar.button("Login,:red"*"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
             st.session_state["logged_in"] = True
             st.success("Logged in successfully!")  # Show success message
@@ -88,9 +88,9 @@ def instructions_page():
 
 def upload_page():
     st.header("Pengumpulan Proposal Skripsi")
-    st.subheader("Cek Kelengkapan Berkas")
+    st.subheader("Cek Kelengkapan Berkas",divider:"gray")
 
-    # Download ZIP File from Teams
+    st.markdown("Download ZIP File from Teams")
     st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
     st.write("Once the link opens, it will direct you to the OneDrive Atma Jaya folder: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. At the top of the page, you will see a toolbar with a ‘Download’ button. Click the ‘Download’ button to save the file.")
 
