@@ -78,8 +78,7 @@ def validate_filename(filename, expected_format):
 def main():
     if st.session_state["logged_in"]:
         show_protected_content()
-        tab1, tab2, tab ```python
-        tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
+        tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
 
         with tab1:
             st.subheader("Dasbor")
