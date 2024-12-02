@@ -188,7 +188,8 @@ def show_protected_content():
                             "Status": "Semua dokumen sudah dikumpulkan",
                             "Remarks": "-"
                         })
-
+                st.divider()
+                st.write("Laporan akan dihasilkan secara otomatis. Pastikan file yang Anda unggah sudah benar dan sesuai format yang diminta.")
                 report_df = pd.DataFrame(report)
 
                 if not report_df.empty:
