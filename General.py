@@ -11,7 +11,7 @@ image = Image.open('logo.png')
 st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian", divider="gray")
 
-st.title("e-RP: RP Assistant System (Beta)")
+st.title("📑 e-RP: RP Assistant System (Beta)")
 
 # Define a constant for the maximum upload size (in MB)
 MAX_UPLOAD_SIZE_MB = 5000  # 5GB
