@@ -57,8 +57,18 @@ def login():
 
 def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
-    main()
-    
+
+def main():
+    if st.session_state["logged_in"]:
+        home_page()  # Call the home page function
+        instructions_page()  # Call the instructions page function
+        upload_page()  # Call the upload page function
+        if st.sidebar.button("Logout"):  # Logout button
+            st.session_state["logged_in"] = False
+            st.success("Logged out successfully!")
+    else:
+        login()  # Show login UI if not logged in
+        
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
                              .replace("KodeDosenPembimbing", r"\w") \
@@ -227,14 +237,5 @@ def upload_page():
         else:
             st.warning("Silakan upload file terlebih dahulu sebelum membuat laporan.")
 
-def main():
-    if st.session_state["logged_in"]:
-        show_protected_content()  # Show protected content if logged in
-        home_page()  # Call the home page function
-        instructions_page()  # Call the instructions page function
-        upload_page()  # Call the upload page function
-        if st.sidebar.button("Logout"):  # Logout button
-            st.session_state["logged_in"] = False
-            st.success("Logged out successfully!")
-    else:
-        login()  # Show login UI if not logged in
+if __name__ == "__main__":
+    main()
