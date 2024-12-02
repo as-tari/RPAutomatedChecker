@@ -7,6 +7,8 @@ import pandas as pd
 import zipfile
 import time
 
+st.set_page_config(page_title="e-RP: RP Assistant System")
+
 # Display the logo in the sidebar
 try:
     image = Image.open('logo.png')
