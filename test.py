@@ -63,11 +63,9 @@ def main():
         home_page()  # Call the home page function
         instructions_page()  # Call the instructions page function
         upload_page()  # Call the upload page function
-        if st.sidebar.button("Logout"):  # Logout button
-            st.session_state["logged_in"] = False
-            st.success("Logged out successfully!")
-    else:
-        login()  # Show login UI if not logged in
+    if st.sidebar.button("Logout"):  # Logout button
+        st.session_state["logged_in"] = False
+        st.success("Logged out successfully!")
         
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
