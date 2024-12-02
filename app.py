@@ -83,12 +83,13 @@ def show_protected_content():
             if not check_file_size(uploaded_excel):
                 st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
             else:
-                 try:
+                try:
                     df = pd.read_excel(uploaded_excel)
                     required_columns = ['KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', 'KodeDosenReviewer']
                     if not all(col in df.columns for col in required_columns):
                         st.error("File Excel harus memiliki kolom 'KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', dan 'KodeDosenReviewer'.")
-                    else: for index, row in df.iterrows():
+                    else:
+                        for index, row in df.iterrows():
                             students_data[row['KodeMahasiswa']] = {
                                 "name": row['NamaMahasiswa'],
                                 "dosen_pembimbing": row['KodeDosenPembimbing'],
@@ -98,25 +99,25 @@ def show_protected_content():
                 except Exception as e:
                     st.error(f"Error saat membaca file Excel: {e}")
 
-            # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
-            uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP)", type=["zip"])
+        # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
+        uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP)", type=["zip"])
 
-            if uploaded_zip:
-                if not check_file_size(uploaded_zip):
-                    st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
-                else:
-                    BASE_UPLOAD_DIR = "uploads"
-                    os.makedirs(BASE_UPLOAD_DIR, exist_ok=True)
-                    zip_path = os.path.join(BASE_UPLOAD_DIR, uploaded_zip.name)
-                    with open(zip_path, "wb") as f:
-                        f.write(uploaded_zip.getbuffer())
+        if uploaded_zip:
+            if not check_file_size(uploaded_zip):
+                st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
+            else:
+                BASE_UPLOAD_DIR = "uploads"
+                os.makedirs(BASE_UPLOAD_DIR, exist_ok=True)
+                zip_path = os.path.join(BASE_UPLOAD_DIR, uploaded_zip.name)
+                with open(zip_path, "wb") as f:
+                    f.write(uploaded_zip.getbuffer())
 
-                    try:
-                        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-                            zip_ref.extractall(BASE_UPLOAD_DIR)
-                        st.success("File ZIP berhasil diekstrak!")
-                    except zipfile.BadZipFile:
-                        st.error("File ZIP yang diupload tidak valid.")
+                try:
+                    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                        zip_ref.extractall(BASE_UPLOAD_DIR)
+                    st.success("File ZIP berhasil diekstrak!")
+                except zipfile.BadZipFile:
+                    st.error("File ZIP yang diupload tidak valid.")
 
             # Process and validate uploaded data
             if students_data:
@@ -203,10 +204,9 @@ def show_protected_content():
                 else:
                     st.warning("Silakan upload file terlebih dahulu sebelum membuat laporan.")
 
-
-        with tab3:
-            st.subheader("Tindak Lanjut")
-            st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+    with tab3:
+        st.subheader("Tindak Lanjut")
+        st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
 
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
