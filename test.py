@@ -88,7 +88,7 @@ def instructions_page():
 
 def upload_page():
     st.header("Pengumpulan Proposal Skripsi")
-    st.subheader("Cek Kelengkapan Berkas",divider:"gray")
+    st.subheader("Cek Kelengkapan Berkas",divider="gray")
 
     st.markdown("Download ZIP File from Teams")
     st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
