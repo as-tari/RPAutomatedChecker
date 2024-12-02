@@ -12,38 +12,46 @@ st.sidebar.image(image, width=100, output_format="PNG", clamp=True)
 st.sidebar.subheader("PSL 401 Rancangan Penelitian", divider="gray")
 
 st.title("📑 e-RP: RP Assistant System (Beta)")
-st.subheader("Fakultas Psikologi Universitas Katolik Indonesia Atma Jaya")
 
-# Function to hash passwords
+# Define a constant for the maximum upload size (in MB)
+MAX_UPLOAD_SIZE_MB = 5000  # 5GB
+
+# Function to check file size
+def check_file_size(file):
+    return file.size <= MAX_UPLOAD_SIZE_MB * 1024 * 1024  # Convert MB to bytes
+
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
 
 def check_hashes(password, hashed_text):
-    return make_hashes(password) == hashed_text
+    if make_hashes(password) == hashed_text:
+        return hashed_text
+    return False
 
-# Initialize session state for logged in status
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
 
 # Login function
+st.warning("Login is required to access the system. Please try refreshing this page and log in again.")  # Notice for login required
 def login():
-    st.sidebar.subheader("Login")
-    email = st.sidebar.text_input("Email", key="login_email")  # Use a unique key for text input
-    password = st.sidebar.text_input("Password", type='password', key="login_password")  # Use a unique key for password input
+   if st.session_state["logged_in"]:
+       return  # Prevent re-rendering login UI if already logged in
 
-    if st.sidebar.button("Login"):
-        if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
-            st.session_state["logged_in"] = True
-            st.success("Logged in successfully!")  # Show success message
-        else:
-            st.sidebar.warning("Incorrect email or password")
+   email = st.sidebar.text_input("Email", key="login_email")  # Use a unique key for text input
+   password = st.sidebar.text_input("Password", type='password', key="login_password")  # Use a unique key for password input
 
-# Function to show protected content
+   if st.sidebar.button("Login"):
+       if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
+           st.session_state["logged_in"] = True
+           st.success("Logged in successfully!")  # Show success message
+           show_protected_content()  # Show protected content immediately
+           st.experimental_rerun()  # Refresh halaman setelah login berhasil
+       else:
+           st.sidebar.warning("Incorrect email or password")
+
 def show_protected_content():
-    st.title("Welcome to the Protected Page")
-    st.write("This is the protected content that only logged-in users can see.")
+    st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
 
-# Main application logic
 def main():
     # Check if the user is logged in
     if not st.session_state["logged_in"]:
@@ -51,15 +59,11 @@ def main():
         login()  # Show login UI if not logged in
     else:
         # Show protected content if logged in
-        show_protected_content()
-
-        # Logout button
-        if st.sidebar.button("Logout"):
-            st.session_state["logged_in"] = False
-            st.success("Logged out successfully!")
-
-if __name__ == "__main__":
-    main()
+        show_protected_content()    
+    if st.sidebar.button("Logout"):
+        st.session_state["logged_in"] = False
+        st.success("Logged out successfully!")
+    
     login()  # Call the login function
 
 # Validate filename against expected format
