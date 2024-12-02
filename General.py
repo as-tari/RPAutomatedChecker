@@ -32,7 +32,7 @@ if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
 
 # Login function
-st.warning("Login required to access this content.")  # Notice for login required
+st.warning("Login is required to access the system. Please try refreshing this page and log in again.")  # Notice for login required
 def login():
    if st.session_state["logged_in"]:
        return  # Prevent re-rendering login UI if already logged in
