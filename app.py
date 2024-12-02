@@ -72,7 +72,7 @@ def show_protected_content():
         st.divider()
         st.write("Langkah 2")
         # Unggah Data Mahasiswa RP (Excel)
-        uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP:red[*]", type=["xlsx"])
+        uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP :red[*]", type=["xlsx"])
         st.caption("Unggah file dengan format Excel (.xlsx)")
         students_data = {}
 
@@ -99,7 +99,8 @@ def show_protected_content():
         st.write("Langkah 3")
         # Upload Files > Pengumpulan Proposal Skripsi (ZIP)
         uploaded_zip = st.file_uploader("Upload Files > Pengumpulan Proposal Skripsi (ZIP) :red[*]", type=["zip"])
-
+        st.divider()
+        st.write("Laporan akan dihasilkan secara otomatis. Pastikan file yang Anda unggah sudah benar dan sesuai format yang diminta.")
         if uploaded_zip:
             if not check_file_size(uploaded_zip):
                 st.error(f"Ukuran file terlalu besar! Maksimal ukuran file adalah {MAX_UPLOAD_SIZE_MB} MB.")
@@ -188,8 +189,7 @@ def show_protected_content():
                             "Status": "Semua dokumen sudah dikumpulkan",
                             "Remarks": "-"
                         })
-                st.divider()
-                st.write("Laporan akan dihasilkan secara otomatis. Pastikan file yang Anda unggah sudah benar dan sesuai format yang diminta.")
+
                 report_df = pd.DataFrame(report)
 
                 if not report_df.empty:
