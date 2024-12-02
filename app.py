@@ -5,6 +5,7 @@ import os
 import re
 import pandas as pd
 import zipfile
+import time
 
 # Display the logo in the sidebar
 try:
@@ -114,6 +115,8 @@ def show_protected_content():
                 zip_path = os.path.join(BASE_UPLOAD_DIR, uploaded_zip.name)
                 with open(zip_path, "wb") as f:
                     f.write(uploaded_zip.getbuffer())
+                with st.spinner("Uploading..."):
+                    time.sleep(2)  # Simulate a delay for the upload process
 
                 try:
                     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
