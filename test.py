@@ -80,10 +80,8 @@ def validate_filename(filename, expected_format):
                              .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
     return re.match(pattern, filename) is not None
 
-def home_page():
-    st.title("📑 RP Automated Checker")
-    st.markdown("RP Automated Checker is a web-based application designed to streamline the document verification process for Rancangan Penelitian (RP) final submissions.")
-    st.markdown("Proceed to upload your data and documents below.")
+
+st.markdown("Silakan unggah data dan dokumen Anda di bawah ini.")
 
 def instructions_page():
     st.title("Operating Instructions")
