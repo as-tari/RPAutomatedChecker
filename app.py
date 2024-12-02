@@ -40,7 +40,7 @@ def login():
 
     email = st.sidebar.text_input("Email :red[*]", key="login_email")
     password = st.sidebar.text_input("Password :red[*]", type='password', key="login_password")
-    st.warning("Login is required to access the system.")
+    st.warning("Login is required to access the system. Please refresh the page and try logging in again.")
 
     if st.sidebar.button("Login"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
@@ -70,8 +70,9 @@ def show_protected_content():
 
     with tab2:
         st.subheader("Cek Kelengkapan", divider="gray")
-                
-        st.markdown("Download ZIP File from Teams")
+
+        container = st.container(border=True)
+        container.write("This is inside the container")
         st.link_button("Download ZIP File from Teams", "https://studentatmajayaac.sharepoint.com/:f:/r/sites/PSL401RPGanjil2425/Shared%20Documents/Pengumpulan%20Proposal%20Skripsi?csf=1&web=1&e=oiF5Qt")
         st.write("Once the link opens, it will direct you to the OneDrive Atma Jaya folder: PSL 401 RP Ganjil 24/25 > Documents > Pengumpulan Proposal Skripsi. At the top of the page, you will see a toolbar with a ‘Download’ button. Click the ‘Download’ button to save the file.")
 
