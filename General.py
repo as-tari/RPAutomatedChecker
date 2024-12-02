@@ -42,18 +42,15 @@ def login():
     if st.button("Login"):
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
             st.session_state["logged_in"] = True
-            st.success("Logged in successfully!")
-            # Call the function to display the protected content
-            show_protected_content()
+            st.success("Logged in successfully!",on_click=show_protected_content()) # Call the function to display the protected content
         else:
             st.warning("Incorrect email or password")
-
-def show_protected_content():
-    st.title("Welcome to the Protected Page")
-
     if st.button("Logout"):
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
+
+def show_protected_content():
+    st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
 
 # Validate filename against expected format
 def validate_filename(filename, expected_format):
