@@ -80,11 +80,8 @@ def validate_filename(filename, expected_format):
                              .replace("RencanaKerjaPenulisanSkripsi", r"Rencana Kerja Penulisan Skripsi")
     return re.match(pattern, filename) is not None
 
-
-st.markdown("Silakan unggah data dan dokumen Anda di bawah ini.")
-
 def instructions_page():
-    st.title("Operating Instructions")
+    st.markdown("Silakan unggah data dan dokumen Anda di bawah ini.")
     st.subheader("1. Upload Student Data (Unggah Data Mahasiswa)")
     st.write("• Click on the “Upload Data” section on the homepage.")
     st.write("• Select the Excel file containing student data.")
