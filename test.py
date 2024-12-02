@@ -48,11 +48,11 @@ def login():
             st.sidebar.warning("Incorrect email or password")
 
         # Check if both email and password are empty
-        if email.strip() and password.strip():
+        if not email.strip() and not password.strip():
             st.warning("Both email and password are required to log in. Please enter your credentials.")
-        if email.strip() and not password.strip():
+        elif not email.strip():
             st.warning("Email is required to log in. Please enter your email.")
-        if password.strip and not email.strip():
+        elif not password.strip():
             st.warning("Password is required to log in. Please enter your password.")
 
 def show_protected_content():
