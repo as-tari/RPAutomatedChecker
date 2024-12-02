@@ -57,7 +57,8 @@ def login():
 
 def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
-
+    main()
+    
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
                              .replace("KodeDosenPembimbing", r"\w") \
@@ -237,6 +238,3 @@ def main():
             st.success("Logged out successfully!")
     else:
         login()  # Show login UI if not logged in
-
-if __name__ == "__main__":
-    main()
