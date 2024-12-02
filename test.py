@@ -42,6 +42,8 @@ def login():
         if email == "rp.fpuaj@gmail.com" and check_hashes(password, make_hashes("rp.fpuaj@gmail.com")):
             st.session_state["logged_in"] = True
             st.success("Logged in successfully!")  # Show success message
+            st.session_state["logged_in"] = False
+            st.warning("Login is required to access the system. Please try refreshing this page and log in again.")  # Notice for login required
         else:
             st.sidebar.warning("Incorrect email or password")
 
