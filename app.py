@@ -68,7 +68,7 @@ def show_protected_content():
         st.write("Langkah 2")
         # Unggah Data Mahasiswa RP (Excel)
         uploaded_excel = st.file_uploader("Unggah Data Mahasiswa RP :red[*]", type=["xlsx"])
-        st.caption("Unggah file dengan format Excel (.xlsx)")
+        st.caption("Unggah file dengan format Excel (.xlsx). :warning: File Excel harus memiliki kolom 'KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', dan 'KodeDosenReviewer'.")
         students_data = {}
 
         if uploaded_excel:
