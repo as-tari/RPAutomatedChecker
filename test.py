@@ -57,16 +57,22 @@ def login():
 
 def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
-
-def main():
-    if st.session_state["logged_in"]:
-        home_page()  # Call the home page function
-        instructions_page()  # Call the instructions page function
-        upload_page()  # Call the upload page function
     if st.sidebar.button("Logout"):  # Logout button
         st.session_state["logged_in"] = False
         st.success("Logged out successfully!")
         
+tab1, tab2, tab3 = st.tabs(["Dasbor", "Cek Kelengkapan", "Tindak Lanjut"])
+
+with tab1:
+    st.header("A cat")
+    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+with tab2:
+    st.header("A dog")
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+with tab3:
+    st.header("An owl")
+    st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+    
 def validate_filename(filename, expected_format):
     pattern = expected_format.replace("KodeMahasiswa", r"\w{1,2}\d{5}") \
                              .replace("KodeDosenPembimbing", r"\w") \
