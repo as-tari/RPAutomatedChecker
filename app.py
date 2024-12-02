@@ -62,7 +62,7 @@ def show_protected_content():
     st.markdown("**Selamat datang di sistem e-RP!** Aplikasi ini dirancang untuk mempermudah pengecekan kelengkapan dokumen proposal mahasiswa.")
     
     # Menambahkan tab setelah pesan sambutan
-    tab 1 == st.tabs(["Cek Kelengkapan"])
+    tab 1 = st.tabs(["Cek Kelengkapan"])
 
     with tab1:
         st.write("Langkah 1")
