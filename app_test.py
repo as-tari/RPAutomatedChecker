@@ -11,14 +11,6 @@ st.set_page_config(
     page_title="Log in | e-RP Assistant System"
 )
 
-# Create a dialog for login requirement
-if st.dialog("Log in required"):
-    st.warning(":warning: Login is required to access the system. Click the button if you wish to proceed.")
-    if st.button("Proceed to log in"):
-        # Add your login logic here
-        st.success("Redirecting to login...")
-        login ()
-
 # Display the logo in the sidebar
 try:
     image = Image.open('images/logo.png')
@@ -44,6 +36,13 @@ def make_hashes(password):
 def check_hashes(password, hashed_text):
     return make_hashes(password) == hashed_text
 
+# Create a dialog for login requirement
+if @st.dialog("Log in required"):
+    st.warning(":warning: Login is required to access the system. Click the button if you wish to proceed.")
+    if st.button("Proceed to log in"):
+        # Add your login logic here
+        st.success("Redirecting to login...")
+        
 # Initialize session state for logged in status
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
