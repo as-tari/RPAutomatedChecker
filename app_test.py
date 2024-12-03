@@ -1,5 +1,6 @@
 import streamlit as st
 from PIL import Image
+from stqdm import stqdm
 import hashlib
 import os
 import re
