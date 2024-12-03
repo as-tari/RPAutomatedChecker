@@ -8,16 +8,12 @@ import zipfile
 import time
 
 @st.dialog("Log in required")
-st.warning(":warning: Login is required to access the system. If you are unable to proceed, please refresh the page and try logging in again.")
-reason = st.text_input("Because...")
-if st.button("Submit"):
-    st.session_state.vote = {"item": item, "reason": reason}
-    st.rerun()
-    st.button("I understand and wish to proceed."):
-else:
-    f"You voted for {st.session_state.vote['item']} because {st.session_state.vote['reason']}"
+    st.warning(":warning: Login is required to access the system. Click the button if you wish to proceed.")
+    st.button("Proceed to log in"):
 
-st.set_page_config(page_title="e-RP Assistant System")
+st.set_page_config(
+    page_title="Log in | e-RP Assistant System"
+)
 
 # Display the logo in the sidebar
 try:
