@@ -7,19 +7,13 @@ import pandas as pd
 import zipfile
 import time
 
-@st.dialog("Cast your vote")
-st.write(f"Why is {item} your favorite?")
+@st.dialog("Log in required")
+st.warning(":warning: Login is required to access the system. If you are unable to proceed, please refresh the page and try logging in again.")
 reason = st.text_input("Because...")
 if st.button("Submit"):
     st.session_state.vote = {"item": item, "reason": reason}
     st.rerun()
-
-if "vote" not in st.session_state:
-    st.write("Vote for your favorite")
-    if st.button("A"):
-        vote("A")
-    if st.button("B"):
-        vote("B")
+    st.button("I understand and wish to proceed."):
 else:
     f"You voted for {st.session_state.vote['item']} because {st.session_state.vote['reason']}"
 
