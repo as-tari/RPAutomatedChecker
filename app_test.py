@@ -7,7 +7,7 @@ import pandas as pd
 import zipfile
 import time
 
-st.dialog("Cast your vote")
+@st.dialog("Cast your vote")
 def vote(item):
     st.write(f"Why is {item} your favorite?")
     reason = st.text_input("Because...")
