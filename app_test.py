@@ -37,7 +37,8 @@ def check_hashes(password, hashed_text):
     return make_hashes(password) == hashed_text
 
 # Create a dialog for login requirement
-@st.dialog("Log in required"):
+@st.dialog("Log in required")
+def dialog(item):
     st.warning(":warning: Login is required to access the system. Click the button if you wish to proceed.")
     if st.button("Proceed to log in"):
         # Add your login logic here
