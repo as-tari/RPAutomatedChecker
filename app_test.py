@@ -36,22 +36,19 @@ def make_hashes(password):
 def check_hashes(password, hashed_text):
     return make_hashes(password) == hashed_text
 
-# Create a dialog for login requirement
-@st.dialog("Log in required")
-def dialog(item):
+# Function to display the login dialog
+def show_login_dialog():
     st.warning(":warning: Login is required to access the system. Click the button if you wish to proceed.")
     if st.button("Proceed to log in"):
         # Add your login logic here
         st.success("Redirecting to login...")
 
+# Check if the dialog has been shown
 if "dialog" not in st.session_state:
-    st.write("Vote for your favorite")
-    if st.button("A"):
-        vote("A")
-    if st.button("B"):
-        vote("B")
+    show_login_dialog()
+    st.session_state.dialog = True  # Set the state to indicate the dialog has been shown
 else:
-    f"You voted for {st.session_state.vote['item']} because {st.session_state.vote['reason']}"
+    st.write("You are already logged in or the dialog has been shown.")
         
 # Initialize session state for logged in status
 if "logged_in" not in st.session_state:
