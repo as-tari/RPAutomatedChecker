@@ -43,6 +43,15 @@ def dialog(item):
     if st.button("Proceed to log in"):
         # Add your login logic here
         st.success("Redirecting to login...")
+
+if "dialog" not in st.session_state:
+    st.write("Vote for your favorite")
+    if st.button("A"):
+        vote("A")
+    if st.button("B"):
+        vote("B")
+else:
+    f"You voted for {st.session_state.vote['item']} because {st.session_state.vote['reason']}"
         
 # Initialize session state for logged in status
 if "logged_in" not in st.session_state:
