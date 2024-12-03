@@ -7,13 +7,17 @@ import pandas as pd
 import zipfile
 import time
 
-@st.dialog("Log in required")
-    st.warning(":warning: Login is required to access the system. Click the button if you wish to proceed.")
-    st.button("Proceed to log in"):
-
 st.set_page_config(
     page_title="Log in | e-RP Assistant System"
 )
+
+# Create a dialog for login requirement
+if st.dialog("Log in required"):
+    st.warning(":warning: Login is required to access the system. Click the button if you wish to proceed.")
+    if st.button("Proceed to log in"):
+        # Add your login logic here
+        st.success("Redirecting to login...")
+        login ()
 
 # Display the logo in the sidebar
 try:
