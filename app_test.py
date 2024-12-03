@@ -8,11 +8,11 @@ import zipfile
 import time
 
 @st.dialog("Cast your vote")
-    st.write(f"Why is {item} your favorite?")
-    reason = st.text_input("Because...")
-    if st.button("Submit"):
-        st.session_state.vote = {"item": item, "reason": reason}
-        st.rerun()
+st.write(f"Why is {item} your favorite?")
+reason = st.text_input("Because...")
+if st.button("Submit"):
+    st.session_state.vote = {"item": item, "reason": reason}
+    st.rerun()
 
 if "vote" not in st.session_state:
     st.write("Vote for your favorite")
