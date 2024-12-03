@@ -1,6 +1,5 @@
 import streamlit as st
 from PIL import Image
-from stqdm import stqdm
 import hashlib
 import os
 import re
@@ -93,11 +92,7 @@ def show_protected_content():
                         df = pd.read_excel(uploaded_excel)
                         end_time = time.time()
                         st.write(f"Waktu untuk membaca file Excel: {end_time - start_time} detik")
-                        from time import sleep
-                        from stqdm import stqdm
-                        
-                        for _ in stqdm(range(50), desc="This is a slow task", mininterval=1):
-                            sleep(0.5)                        
+                        from time import sleep                
     
                         required_columns = ['KodeMahasiswa', 'NamaMahasiswa', 'KodeDosenPembimbing', 'KodeDosenReviewer']
                         if not all(col in df.columns for col in required_columns):
